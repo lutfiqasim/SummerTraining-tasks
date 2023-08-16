@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #00feba, #5b548a);  
+    background-repeat: repeat;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+main {
+    margin: 10px;
+}
+
+header {
+    text-align: center;
+    background-color: #00ABE4;
+    padding: 8pt 0;
+    margin-bottom: 18pt;
+}
+
+legend {
+    background-color: gray;
+    color: white;
+    padding: 5px 10px;
+}
+
+.questionsToAdd {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #0c503e;
+    display: none;
+} 
+
+.addMoreChoices {
+    margin-bottom: 10px;
+}
+
+#container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+input[type="text"]{
+    padding: 5px;
+    width: 240px;
+    margin: 5px 0px 0px 5px;
+}
+.choices-input input {
+    padding: 5px;
+    margin: 5px 0px 0px 5px;
+}
+
+.delete-btn{
+    margin-left: 10px;
+    width: 40px;
+    height: 80px;
+    font-size: 18px;
+    color: #555;
+    line-height: 15px;
+    text-align: right;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.delete-btn:hover{
+    cursor: pointer;
+    background-color:   #859f96;
+}

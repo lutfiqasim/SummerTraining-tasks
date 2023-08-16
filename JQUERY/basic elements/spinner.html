@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Spinner - Default functionality</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+  <script src="/resources/demos/external/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script>
+  $(document).ready( function() {
+    let spinner = $("#spinner").spinner();
+ 
+    $( "#disable" ).on( "click", function() {
+      if ( spinner.spinner( "option", "disabled" ) ) {
+        spinner.spinner( "enable" );
+      } else {
+        spinner.spinner( "disable" );
+      }
+    });
+    $( "#destroy" ).on( "click", function() {
+      if ( spinner.spinner( "instance" ) ) {
+        spinner.spinner( "destroy" );
+      } else {
+        spinner.spinner();
+      }
+    });
+    $( "#getvalue" ).on( "click", function() {
+        $("#alert").text(spinner.spinner("value")).dialog();
+    //   alert( spinner.spinner( "value" ) );
+    });
+    $( "#setvalue" ).on( "click", function() {
+      spinner.spinner( "value", 5 );
+    });
+ 
+    $( "button" ).button();
+  } );
+  </script>
+</head>
+<body>
+ 
+<p>
+  <label for="spinner">Select a value:</label>
+  <input id="spinner" name="value">
+</p>
+ 
+<p>
+  <button id="disable">Toggle disable/enable</button>
+  <button id="destroy">Toggle widget</button>
+</p>
+ <div id="alert" title="Value"></div>
+<p>
+  <button id="getvalue">Get value</button>
+  <button id="setvalue">Set value to 5</button>
+</p>
+ 
+ 
+</body>
+</html>

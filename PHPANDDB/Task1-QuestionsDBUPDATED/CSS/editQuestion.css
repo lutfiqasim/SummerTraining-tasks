@@ -1,0 +1,21 @@
+fieldset input{
+    margin: 10px;
+}
+#EditQuestion-div{
+    margin: 10px;
+    padding: 10px;
+    color: black;
+}
+button[type="submit"] {
+    background-color: #ff6666;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #ff5555;
+}

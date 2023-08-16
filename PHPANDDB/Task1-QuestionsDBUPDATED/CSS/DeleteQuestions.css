@@ -1,0 +1,141 @@
+table,
+th,
+td {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 10px;
+}
+
+.deletequestion {
+    margin-left: 10px;
+    width: 40px;
+    height: 80px;
+    font-size: 18px;
+    color: #555;
+    line-height: 15px;
+    text-align: right;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.deletequestion:hover {
+    cursor: pointer;
+    background-color: #859f96;
+}
+
+#sort {
+    text-align: center;
+    display: flex;
+    flex-direction: column-reverse;
+    /* Display elements vertically above themselves */
+    align-items: flex-end;
+    /* Align items to the right horizontally */
+}
+
+.sortingBtn {
+    border-top: 1px solid #859f96;
+    border-bottom: 1px solid #859f96;
+    border-collapse: collapse;
+    cursor: pointer;
+    flex: 1;
+}
+
+.sortingBtn:hover {
+    background-color: #859f96;
+}
+
+.flex-spacer {
+    flex: 0 0 10px;
+    /* Adjust the desired spacing value */
+}
+
+.editQuestion {
+    margin-left: 10px;
+    width: 40px;
+    height: 80px;
+    font-size: 18px;
+    color: #555;
+    line-height: 15px;
+    text-align: right;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.editQuestion:hover {
+    cursor: pointer;
+    background-color: #859f96;
+}
+
+.ViewQuestion {
+    margin-left: 10px;
+    width: 40px;
+    height: 80px;
+    font-size: 18px;
+    color: #555;
+    line-height: 15px;
+    text-align: right;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.ViewQuestion:hover {
+    cursor: pointer;
+    background-color: #859f96;
+}
+
+button {
+    background-color: #ff6666;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ff5555;
+}
+
+/* 
+.radioChoices {
+    margin: 5px;
+    border: .5px solid #ff5555;
+} */
+
+/* .choicesDiv {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 5px;
+    border: 2px dotted  #ff6666;
+} */
+.choicesDiv {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.choicesDiv h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.choicesDiv .radioChoices {
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.choicesDiv .radioChoices::before {
+    content: "\2022";
+    /* Bullet point */
+    margin-right: 5px;
+}
+
+.choicesDiv input[type="radio"] {
+    margin-right: 5px;
+}

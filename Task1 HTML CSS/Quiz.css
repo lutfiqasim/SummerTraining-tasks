@@ -1,0 +1,23 @@
+
+body{
+    margin-top: 0;  
+    background-color:#E9F1FA ;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header{
+    margin: 0;
+    text-align: center;
+    background-color:#00ABE4;
+    padding: 8pt 0;
+    margin-bottom: 18pt;
+}
+legend{
+    background-color: gray;
+    color: white;
+    padding: 5px 10px;
+}
+/* #container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */

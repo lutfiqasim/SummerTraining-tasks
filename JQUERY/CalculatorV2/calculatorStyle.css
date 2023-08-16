@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+    background-color: #e3f9ff;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #153677, #4e085f);
+    justify-content: center;
+}
+
+.calculator {
+    background-color: #3a4452;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* inputs of form */
+.calculator form input {
+    border: 0;
+    outline: 0;
+    width: 60pt;
+    height: 60pt;
+    border-radius: 20px;
+    box-shadow: -8px -8px 15px rgba(255, 255, 255, .1),
+        5px 5px 5px 15px rgba(0, 0, 0, .2);
+    background: transparent;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+}
+
+form .display {
+    display: flex;
+    justify-content: flex-end;
+
+    margin: 20px 0;
+}
+
+form .display input {
+    text-align: right;
+    flex: 1;
+    font-size: 45pt;
+    padding: 20px;
+    border: 2px solid white;
+    box-shadow: none;
+
+}
+
+form input.equal {
+    width: 145pt;
+}
+
+form input.operator {
+    color: #44ffd8;
+}
+
+/* PRevious calculations */
+
+.container2 {
+    width: 40%;
+    min-height: 100vh;
+    /* background: linear-gradient(135deg,#153677,#4e085f); */
+    padding: 10px;
+}
+
+.previous {
+    width: 100%;
+    max-width: 540px;
+    background: #fff;
+    margin: 100px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+}
+
+#top-part {
+    width: 100%;
+    max-width: 540px;
+    background: #fff;
+    margin: 10px auto 20px;
+    padding: 0px 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    /* Align items in a row */
+    justify-content: space-between;
+    /* Distribute items with space in between */
+}
+
+#top-part h2 {
+    color: #002765;
+    margin-bottom: 20px;
+}
+
+#top-part .clear-all {
+    /* Remove margin-left, and use margin-right to separate the button from the h2 */
+    margin-right: 5px;
+
+}
+
+#slide {
+    margin-right: -50px;
+    margin-left: 20px;
+    width: 120px;
+}
+
+input {
+    /* Take full available width */
+    flex: 1;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    padding: 10pt;
+}
+
+button {
+    border: none;
+    outline: none;
+    padding: 6pt 20pt;
+    background: #ff5945;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+ul li {
+    list-style: none;
+    font-size: 18px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    top: 6pt;
+    left: 8px;
+}
+
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+
+
+
+ul li span {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+ul li span:hover {
+    background: #edeef0;
+}

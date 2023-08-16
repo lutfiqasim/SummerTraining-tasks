@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script type="text/javascript" src="script.js" defer="defer"></script>
+</head>
+
+<body>
+    <header>
+        <div style="display: flex; align-items: center; justify-content: center; color: red;">
+            <h1>Test Your knowledge</h1>
+        </div>
+    </header>
+    <main>
+        <section>
+            <form method="post">
+                <fieldset>
+                    <!-- <div id="container"> -->
+                    <legend>Quiz:</legend>
+                    <!-- </div> -->
+                    <div class="radioGroup">
+                        <p id="1" class="questions">What does HTML stand for?</p>
+                        <input type="radio" id="Hyperlinks and Text Markup Language" name="answer1"
+                            value="Hyperlinks and Text Markup Language" required="required" />
+                        <label for="Hyperlinks and Text Markup Language">Hyperlinks and Text Markup Language</label><br>
+                        <input type="radio" id="Hyper Text Markup Language" name="answer1"
+                            value="Hyper Text Markup Language" />
+                        <label for="Hyper Text Markup Language">Hyper Text Markup Language</label><br>
+                        <input type="radio" id="Home Tool Language" name="answer1" value="Home Tool Languagee" />
+                        <label for="Home Tool Language">Home Tool Language</label><br />
+                        <br>
+                    </div>
+                    <div class="radioGroup">
+                        <p id="2" class="questions">Who is making the Web standards?</p>
+                        <input type="radio" id="The World Wide Web Consortium" name="answer2"
+                            value="The World Wide Web Consortium" required="required" />
+                        <label for="The World Wide Web Consortium">The World Wide Web Consortium</label><br />
+                        <input type="radio" id="Google" name="answer2" value="Google" />
+                        <label for="Google">Google</label><br>
+                        <input type="radio" id="Mozilla" name="answer2" value="Mozilla" />
+                        <label for="Mozilla">Mozilla</label><br />
+                        <br>
+                    </div>
+                    <div class="radioGroup">
+                        <p id="3" class="questions">Choose the correct HTML element for the largest heading:</p>
+                        <input type="radio" id="h6" name="answer3" value="h6" required="required" .>
+                        <label for="h6">&lt;h6&gt;</label><br>
+                        <input type="radio" id="h1" name="answer3" value="h1" />
+                        <label for="h1">&lt;h1&gt;</label><br />
+                        <input type="radio" id="head" name="answer3" value="head" />
+                        <label for="head">&lt;head&gt;</label><br /><br />
+                    </div>
+                    <div id="status"
+                        style="display: flex; align-items: center; justify-content: left; color: green; display: none;">
+                        <h3>Thanks for sumbitting answers. Your grades will be shown soon</h3>
+                    </div>
+                    <input type="submit" value="Check Answer" onclick="" />
+                </fieldset>
+            </form>
+        </section>
+    </main>
+</body>
+
+</html>
