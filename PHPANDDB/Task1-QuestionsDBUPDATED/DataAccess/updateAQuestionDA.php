@@ -12,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'], $_POST['dat
 
         if ($action === "Update") {
             // Call updateData function and store result messages in array
-            $resultMessages = updateData($dataToUpdate);
+            // $resultMessages = updateData($dataToUpdate);
+            print_r($_POST['data']);
             // Output result messages
             echo implode("<br/>", $resultMessages);
         } else {
@@ -21,8 +22,10 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'], $_POST['dat
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
-} elseif (isset($_POST['action'])) {
-    print_r($_POST);
+} elseif (isset($_POST['action']) && $_POST['action'] == "cancelUpdate") {
+    // print_r($_POST);
+    header("Location:..\Pages\index.html");
+    exit();
 
 } else {
     //  required data is not set
@@ -43,41 +46,41 @@ function updateData($data)
 
             // Loop through the remaining data items
             // if (validateFormat($data)){
-                foreach ($data as $item) {
-                    if (isset($item['key'], $item['value'])) {
-                        $key = $item['key'];
-                        $value = $item['value'];
+            foreach ($data as $item) {
+                if (isset($item['key'], $item['value'])) {
+                    $key = $item['key'];
+                    $value = $item['value'];
 
-                        // Check different keys and perform  updates based on key 
-                        if ($key === "newQuestion" && !empty($value)) {
-                            $resultMessages[] = "New Question: " . $updateObj->updateQuestionSyntax($questionId, $value);
-                        } elseif ($key === 'newCorrectAnswer' && !empty($value)) {
-                            $resultMessages[] = "Correct Answer: " . $updateObj->updateCorrectAnswer($questionId, $value);
-                        } elseif ($key === 'choicesUpdate') {
-                            foreach ($value as $choice) {
-                                if (isset($choice['key'], $choice['value']) && !empty($choice['value'])) {
-                                    $choiceId = $choice['key'];
-                                    $choiceValue = $choice['value'];
-                                    $resultMessages[] = "\nChoice update: " . $updateObj->updateChoice($choiceId, $choiceValue);
-                                }
+                    // Check different keys and perform  updates based on key 
+                    if ($key === "newQuestion" && !empty($value)) {
+                        $resultMessages[] = "New Question: " . $updateObj->updateQuestionSyntax($questionId, $value);
+                    } elseif ($key === 'newCorrectAnswer' && !empty($value)) {
+                        $resultMessages[] = "Correct Answer: " . $updateObj->updateCorrectAnswer($questionId, $value);
+                    } elseif ($key === 'choicesUpdate') {
+                        foreach ($value as $choice) {
+                            if (isset($choice['key'], $choice['value']) && !empty($choice['value'])) {
+                                $choiceId = $choice['key'];
+                                $choiceValue = $choice['value'];
+                                $resultMessages[] = "\nChoice update: " . $updateObj->updateChoice($choiceId, $choiceValue);
                             }
-                        } elseif ($key === 'NewAddedChoices') { //Newly added choices
-                            $insertChoice = new UploadQuestion();
-
-                            foreach ($value as $newChoice) {
-                                if (isset($newChoice['key'], $newChoice['value']) && !empty($newChoice['value'])) {
-                                    $choiceValue = $newChoice['value'];
-                                    $resultMessages[] = "\n Inserting new Choice: " . $insertChoice->insertNewChoice($choiceValue, $questionId);
-                                }
-                            }
-
-                        } else {
-                            $resultMessages[] = "ELSE: UNDEFINED DATA OBJECT ";
                         }
+                    } elseif ($key === 'NewAddedChoices') { //Newly added choices
+                        $insertChoice = new UploadQuestion();
+
+                        foreach ($value as $newChoice) {
+                            if (isset($newChoice['key'], $newChoice['value']) && !empty($newChoice['value'])) {
+                                $choiceValue = $newChoice['value'];
+                                $resultMessages[] = "\n Inserting new Choice: " . $insertChoice->insertNewChoice($choiceValue, $questionId);
+                            }
+                        }
+
                     } else {
-                        $resultMessages[] = "\nItem not entered: " . $item['key'];
+                        $resultMessages[] = "ELSE: UNDEFINED DATA OBJECT ";
                     }
+                } else {
+                    $resultMessages[] = "\nItem not entered: " . $item['key'];
                 }
+            }
             // }
             return $resultMessages;
         } else {

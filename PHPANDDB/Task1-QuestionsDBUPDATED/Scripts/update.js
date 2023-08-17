@@ -61,6 +61,12 @@ $(document).ready(function () {
                 showDialog("Each choice must be unique");
         }
     });
+    //Cancel update
+    $("#dataContainer").on("click", "#cancelUpdate", function (event) {
+        console.log("Canceled");
+        $(dataContainer).empty();
+        showList();
+    });
 
     function sendDataToUpdate(dataArray) {
         $.ajax({

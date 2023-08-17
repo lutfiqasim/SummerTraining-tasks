@@ -49,7 +49,7 @@ function dataDisplayFormat($data)
         return;
     }
     echo "<noscript>";
-    echo "<form method='post' action='#'>";
+    echo "<form method='post' action='updateAQuestionDA.php'>";
     echo "</noscript>";
     echo "<div id='updateQuestionsDiv'>";
     echo "<h3 style=color:green;>Please fill in only data you want to update</h3>";
@@ -86,6 +86,7 @@ function dataDisplayFormat($data)
     echo "<br/>";
     echo "<button class='addChoiceBtn'>Add More choices</button><br>";
     echo "<button id ='updateButton' name='action' value='update'>Update Question data</button>";
+    echo "<button id='cancelUpdate' name='action' value='cancelUpdate'>Cancel</button>";
     echo "</div>";
     echo "<noscript>";
     echo "</form>";
