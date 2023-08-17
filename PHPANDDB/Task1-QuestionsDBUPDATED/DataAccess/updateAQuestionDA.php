@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'], $_POST['dat
         if ($action === "Update") {
             // Call updateData function and store result messages in array
             $resultMessages = updateData($dataToUpdate);
-            // print_r($_POST['data']);
             // Output result messages
             echo implode("<br/>\n", $resultMessages);
         } else {
