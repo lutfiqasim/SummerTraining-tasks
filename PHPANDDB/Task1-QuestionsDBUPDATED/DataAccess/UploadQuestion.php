@@ -19,10 +19,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             if ($result != "") {
                 // header("Location:..\Pages\AddQuestion.php?message=" . $result);
                 // header("Location: " . $_SERVER['HTTP_REFERER'] . "?message=" . $result);
-                header("Location:..\Pages\index.html?message=" . $result);
+                header("Location:..\Pages\AddQuestion.php?message=" . $result);
 
             } else {
-                header("Location:..\Pages\index.html?message=Added-data-successfully");
+                header("Location:..\Pages\AddQuestion.php?message=Added-data-successfully");
                 // header("Location:..\Pages\AddQuestion.php?message=Added-data-successfully");
                 // header("Location: " . $_SERVER['PHP_SELF'] . "?message=Added-data-successfully");
             }
@@ -76,7 +76,7 @@ function countNumberOfChoices($choicesArray)
 {
     $numberOfChoices = 1;
     foreach ($choicesArray as $choice) {
-        if ($choicesArray !== "") {
+        if ($choice !== "") {
             $numberOfChoices += 1;
         }
     }

@@ -94,6 +94,9 @@ function dataDisplayFormat($data)
 }
 function displayAsQuestion($data)
 {
+    echo "<noscript>";
+    echo "<form method='post' action='updateAQuestionDA.php'>";
+    echo "</noscript>";
     echo "<div class='choicesDiv'>";
     echo "<h3> {$data[0]['question_syntax']}</h3><br/>";
     $choicesData = array();
@@ -104,7 +107,11 @@ function displayAsQuestion($data)
     foreach ($choicesData as $choice) {
         echo (" <input type='radio' id='$choice' name='answer1'value='$choice'/><label class='radioChoices' for='$choice'>{$choice}</label> <br>");
     }
+    echo "<hr/><button id='cancelUpdate' name='action' value='cancelUpdate'>Go back</button>";
     echo "</div>";
+    echo "<noscript>";
+    echo "</form>";
+    echo "</noscript>";
 }
 
 ?>
@@ -115,17 +122,9 @@ function displayAsQuestion($data)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display As question</title>
+    
     <noscript>
         <style>
-            /* div {
-                margin-top: 10%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                padding: 5px;
-                border: 2px dotted #ff6666;
-            } */
             .choicesDiv {
                 border: 1px solid #ccc;
                 padding: 10px;
@@ -153,6 +152,7 @@ function displayAsQuestion($data)
             .choicesDiv input[type="radio"] {
                 margin-right: 5px;
             }
+
             /* UPDATE STYLE */
             #updateQuestionsDiv {
                 font-family: Arial, sans-serif;

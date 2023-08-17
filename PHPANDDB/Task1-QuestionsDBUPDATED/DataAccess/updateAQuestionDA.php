@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'], $_POST['dat
     }
 } elseif (isset($_POST['action']) && $_POST['action'] == "cancelUpdate") {
     // print_r($_POST);
-    header("Location:..\Pages\index.html");
+    header("Location:..\Pages\Edit-DeleteQuestions.php");
     exit();
 
 } else {

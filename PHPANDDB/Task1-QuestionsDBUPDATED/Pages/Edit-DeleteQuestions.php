@@ -30,6 +30,20 @@ function displaySorted($action)
 }
 function displayFormat($questions)
 {
+
+    $header = "<section id='tabs'>
+    <nav>
+        <ul>
+            <li>
+                <a href='Edit-DeleteQuestions.php'>Edit\Delete Questions</a>
+            </li>
+            <li>
+                <a href='AddQuestion.php'>Add question</a>
+            </li>
+        </ul>
+    </nav>
+</section>";
+    echo $header;
     echo "<table style='width:100%'>";
     // echo "<tr>";
     echo "<div id ='sort'>";
@@ -84,9 +98,15 @@ function deleteQuestion($data)
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- Dialog -->
+    <link type="text/css" rel="stylesheet" href="..\CSS\navBar.css" />
     <link type="text/css" rel="stylesheet" href="..\CSS\DeleteQuestions.css" />
     <script type="text/javascript" src="..\Scripts\delete.js" defer="defer"></script>
     <script type="text/javascript" src="..\Scripts\update.js" defer="defer"></script>
+    <style>
+        body {
+            margin: 20px;
+        }
+    </style>
 </head>
 
 <body>

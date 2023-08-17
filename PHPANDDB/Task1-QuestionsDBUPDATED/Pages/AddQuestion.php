@@ -17,6 +17,7 @@ Add questions page HTML
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- Dialog -->
     <link type="text/css" rel="stylesheet" href="..\CSS\addQuestionsStyle.css" />
+    <link type="text/css" rel="stylesheet" href="..\CSS\navBar.css" />
     <script type="text/javascript" src="..\Scripts\script.js" defer="defer"></script>
 </head>
 
@@ -24,12 +25,25 @@ Add questions page HTML
     <header>
         <div style="color: red;">
             <h1>Add a multiple choice question</h1>
-            <noscript>
+            <!-- <noscript>
                 <a href="Edit-DeleteQuestions.php" style="text-decoration:none;">Edit\Delete Questions</a>
-            </noscript>
+            </noscript> -->
         </div>
     </header>
     <main>
+    <section id="tabs">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="Edit-DeleteQuestions.php">Edit\Delete Questions</a>
+                    </li>
+                    <li>
+                        <!-- <a href="AddQuestion.php">Add Questions</a> -->
+                        <a href="AddQuestion.php">Add question</a>
+                    </li>
+                </ul>
+            </nav>
+        </section>
         <div id="dialog" title="inform"></div>
         <section>
             <?php
