@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("Database.php");
 include("..\phpActions\InsertQuestions.php");
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $validation = validateInsertedQuestion($_POST);
         if ($validation === true) {
             $insertQuestion = new UploadQuestion();
-            $result = $insertQuestion->addQuestion($_POST);
+            $result = $insertQuestion->addQuestion($_POST,$_SESSION['user_id']);
             if ($result != "") {
                 // header("Location:..\Pages\AddQuestion.php?message=" . $result);
                 // header("Location: " . $_SERVER['HTTP_REFERER'] . "?message=" . $result);

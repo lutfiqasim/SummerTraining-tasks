@@ -4,8 +4,9 @@ td {
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     border-collapse: collapse;
+    width: fit-content;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
 }
 
 .deletequestion {
@@ -140,6 +141,7 @@ button:hover {
 .choicesDiv input[type="radio"] {
     margin-right: 5px;
 }
+
 input[type="text"],
 input[type="number"] {
     width: 100%;

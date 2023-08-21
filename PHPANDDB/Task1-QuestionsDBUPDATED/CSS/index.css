@@ -72,6 +72,6 @@ button[type="button"] {
 }
 
 button[type="submit"]:hover,
-button[type="button"]:hover{
+button[type="button"]:hover {
     background-color: #ff5555;
 }

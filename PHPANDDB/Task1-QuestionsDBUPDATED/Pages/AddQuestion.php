@@ -31,15 +31,15 @@ Add questions page HTML
         </div>
     </header>
     <main>
-    <section id="tabs">
+        <section id="tabs">
             <nav>
                 <ul>
                     <li>
-                        <a href="Edit-DeleteQuestions.php">Edit\Delete Questions</a>
+                        <a href="index.php">Main page</a>
                     </li>
                     <li>
                         <!-- <a href="AddQuestion.php">Add Questions</a> -->
-                        <a href="AddQuestion.php">Add question</a>
+                        <a href="SeeAllQuestions.php">See all user Questions</a>
                     </li>
                 </ul>
             </nav>
@@ -75,16 +75,12 @@ Add questions page HTML
                     <script>
                         document.addEventListener('DOMContentLoaded', function () {
                             const urlParams = new URLSearchParams(window.location.search);
-                            if (urlParams.has('message') && urlParams.get('message') === 'success') {
+                            if (urlParams.has('message')) {
                                 const statusDiv = document.getElementById('status');
                                 statusDiv.append("Thanks for Adding questions to our Website");
                                 statusDiv.style.display = 'block';
                                 statusDiv.style.color = 'green';
-                            } else if (urlParams.has('message') && urlParams.get('message') != '') {
-                                const statusDiv = document.getElementById('status');
-                                statusDiv.append(urlParams.get('message'));
-                                statusDiv.style.display = 'block';
-                                statusDiv.style.color = 'red';
+                                window.history.replaceState({}, "", "/" + "Summer%20Training%201/PHPANDDB//Task1-QuestionsDBUPDATED/Pages/AddQuestion.php");
                             }
                         });
                     </script>

@@ -4,7 +4,7 @@ class UploadQuestion
 {
     private $error = "";
 
-    public function addQuestion($data)
+    public function addQuestion($data, $userId)
     {
         try {
             // Validate input
@@ -13,10 +13,10 @@ class UploadQuestion
             }
 
             $question_syntax = $data['questionSyntax'];
-            $query = "INSERT INTO questions (`question-Syntax`) VALUES (?)";
+            $query = "INSERT INTO questions (`question-Syntax`,userId ) VALUES (?,?)";
 
             $conn = new Database();
-            $conn->write($query, [$question_syntax]);
+            $conn->write($query, [$question_syntax, $userId]);
 
             $this->addChoices($data);
             return $this->error;
@@ -25,7 +25,7 @@ class UploadQuestion
                 $err = "The question already exists in the database. Thanks for trying";
                 return $err;
             } else {
-                return "An error occurred: " . $e->getMessage();
+                return "An error occurred: " . $e->getMessage()."Error is : " .$userId."";
             }
         }
     }

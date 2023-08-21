@@ -1,8 +1,9 @@
 <?php
 
-include("Database.php"); // connection 
+include_once("Database.php"); // connection 
 include('..\phpActions\UpdateQuestion.php'); // updating questiin
 include('..\phpActions\InsertQuestions.php'); // Inserting choices
+// include_once("..\Edit-DeleteQuestions.php");
 // Check if the request method is POST and required data is set
 if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'], $_POST['data'])) {
     try {
@@ -23,11 +24,17 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && isset($_POST['action'], $_POST['dat
     }
 } elseif (isset($_POST['action']) && $_POST['action'] == "cancelUpdate") {
     // print_r($_POST);
-    header("Location:..\Pages\Edit-DeleteQuestions.php");
+    header("Location:..\Pages\index.php?");
     exit();
 
+} elseif ((isset($_POST['action'])) && ($_POST['action'] == "EditView" || $_POST['action'] == "deleteView")) {
+    echo "<div 
+    style='color:red;display: flex;justify-content: center;align-items: center;'>
+    <h2 style='border:1px solid black;'>ERROR:Please Activate Java script to edit/delete a question</h2>
+    </div>";
 } else {
     //  required data is not set
+    print_r($_POST);
     echo "<h3>1-Data not set</h3>";
 }
 
@@ -69,7 +76,7 @@ function updateData($data)
                         foreach ($value as $newChoice) {
                             if (isset($newChoice['key'], $newChoice['value']) && !empty($newChoice['value'])) {
                                 $choiceValue = $newChoice['value'];
-                                $resultMessages[] = "\n Inserting new Choice: " . $insertChoice->insertNewChoice($choiceValue, $questionId);
+                                $resultMessages[] = "\n Inserted new Choice: " . $insertChoice->insertNewChoice($choiceValue, $questionId)." success";
                             }
                         }
 

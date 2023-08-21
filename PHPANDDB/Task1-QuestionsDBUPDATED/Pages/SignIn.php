@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         if ($result != "") {
             header("Location:SignIn.php?message=" . $result);
         } else {
-            header("Location:index.php?message= sign in successfully");
+            header("Location:index.php?");
         }
     }
 }

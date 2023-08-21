@@ -49,10 +49,11 @@ class Signup
         $userName = $data["signup-username"];
         $userEmail = $data["signup-email"];
         $userPassword = $data["signup-password"];
+        $encryptedPassword = md5($userPassword);
         $query = "INSERT INTO users (username,email,password) VALUES (?,?,?)";
         try {
             $conn = new Database();
-            $conn->write($query, [$userName, $userEmail, $userPassword]);
+            $conn->write($query, [$userName, $userEmail, $encryptedPassword]);
 
         } catch (Exception $e) {
             //If Email already exists

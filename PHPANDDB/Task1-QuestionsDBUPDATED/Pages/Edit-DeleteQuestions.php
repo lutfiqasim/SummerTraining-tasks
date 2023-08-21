@@ -1,50 +1,51 @@
 <?php
 /**
  * EDIT / DELETE QUESTION HTML WITH THE DATA RETRIVED display 
- * 
+ * Questions for a single user
  * 
  */
-
-include("..\DataAccess\Database.php");
+include_once("..\DataAccess\Database.php");
 include('..\phpActions\DeleteQuestions.php');
 include('..\phpActions\GetQuestions.php');
+include_once("..\phpActions\Signin.php");
+if (isset($_SESSION['user_id'])) {
+    $signin = new SignIn();
+    $userData = $signin->check_login($_SESSION['user_id']);
+
+} else {
+    header("Location:SignIn.php");
+}
 function displayData()
 {
-    $getData = new GetQuestions();
-    $questions = $getData->retriveQuestions(); // Assuming this returns an array of question data
-    displayFormat($questions);
 
-}
-function displaySorted($action)
-{
-    if ($action === 'SortDescending') {
-        $getData = new GetQuestions();
-        $questions = $getData->retriveQuestionsDescendingOrder();
-        displayFormat($questions);
+    $getData = new GetQuestions();
+    $questions = $getData->retriveQuestionsByUser($_SESSION['user_id']);
+    if (count($questions) < 1) {
+        $noquestionForm = "<div style='margin-top:20px;display:flex;align-items:center;justify-content:center'>
+            <h2 style='border:4px dotted black;padding:5px;'><a href='AddQuestion.php' style='text-decoration: none;color:green;'>You haven't added any questions to our website, click to add one</a></h2>
+        </div>";
+        echo $noquestionForm;
     } else {
-        // echo "else statment";
-        $getData = new GetQuestions();
-        $questions = $getData->retriveQuestionsAscendingOrder();
         displayFormat($questions);
     }
+
 }
+// function displaySorted($action)
+// {
+//     if ($action === 'SortDescending') {
+//         $getData = new GetQuestions();
+//         $questions = $getData->retriveQuestionsDescendingOrder();
+//         displayFormat($questions);
+//     } else {
+//         // echo "else statment";
+//         $getData = new GetQuestions();
+//         $questions = $getData->retriveQuestionsAscendingOrder();
+//         displayFormat($questions);
+//     }
+// }
 function displayFormat($questions)
 {
-
-    $header = "<section id='tabs'>
-    <nav>
-        <ul>
-            <li>
-                <a href='Edit-DeleteQuestions.php'>Edit\Delete Questions</a>
-            </li>
-            <li>
-                <a href='AddQuestion.php'>Add question</a>
-            </li>
-        </ul>
-    </nav>
-</section>";
-    echo $header;
-    echo "<table style='width:100%'>";
+    echo "<table style='width:100%;min-width:800px'>";
     // echo "<tr>";
     echo "<div id ='sort'>";
     echo "<div id='descending' class='sortingBtn'>" . "Sort Descending Order" . "</div>";
@@ -102,11 +103,7 @@ function deleteQuestion($data)
     <link type="text/css" rel="stylesheet" href="..\CSS\DeleteQuestions.css" />
     <script type="text/javascript" src="..\Scripts\delete.js" defer="defer"></script>
     <script type="text/javascript" src="..\Scripts\update.js" defer="defer"></script>
-    <style>
-        body {
-            margin: 20px;
-        }
-    </style>
+
 </head>
 
 <body>

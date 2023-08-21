@@ -2,50 +2,67 @@
 
 class GetQuestions
 {
-    private $error="";
+    private $error = "";
 
     public function retriveQuestions()
     {
-        try{
+        try {
             $query = "SELECT * from questions";
             $conn = new Database();
             $data = $conn->read($query);
-            if($this->error ==""){
+            if ($this->error == "") {
                 return $data;
-            }else{
+            } else {
                 return $this->error;
             }
-        }catch(Exception $e){
-            return "Error accord while getting data:\n".$e->getMessage();
+        } catch (Exception $e) {
+            return "Error accord while getting data:\n" . $e->getMessage();
         }
-    } 
+    }
+    public function retriveQuestionsByUser($userId)
+    {
+        try {
+            $query = "SELECT * from questions Where userId=?";
+            $conn = new Database();
+            $data = $conn->read($query, [$userId]);
+            if ($this->error == "") {
+                return $data;
+            } else {
+                return $this->error;
+            }
+        } catch (Exception $e) {
+            return "Error accord while getting data:\n" . $e->getMessage();
+        }
+    }
 
-    public function retriveQuestionsAscendingOrder(){
-        try{
+    public function retriveQuestionsAscendingOrder()
+    {
+        try {
             $query = "SELECT * from questions ORDER BY id";
             $conn = new Database();
             $data = $conn->read($query);
-            if($this->error ==""){
+            if ($this->error == "") {
                 return $data;
-            }else{
+            } else {
                 return $this->error;
             }
-        }catch(Exception $e){
-            return "Error accord while getting data:\n".$e->getMessage();
+        } catch (Exception $e) {
+            return "Error accord while getting data:\n" . $e->getMessage();
         }
     }
-    public function retriveQuestionsDescendingOrder(){
-        try{
+    public function retriveQuestionsDescendingOrder()
+    {
+        try {
             $query = "SELECT * from questions ORDER BY id DESC";
             $conn = new Database();
             $data = $conn->read($query);
-            if($this->error ==""){
+            if ($this->error == "") {
                 return $data;
-            }else{
+            } else {
                 return $this->error;
             }
-        }catch(Exception $e){
-            return "Error accord while getting data:\n".$e->getMessage();
+        } catch (Exception $e) {
+            return "Error accord while getting data:\n" . $e->getMessage();
         }
     }
 }

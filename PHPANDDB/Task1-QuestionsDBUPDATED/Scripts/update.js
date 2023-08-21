@@ -1,5 +1,3 @@
-//Note to self 
-//Check updated answers for replication
 
 $(document).ready(function () {
 
@@ -64,10 +62,28 @@ $(document).ready(function () {
     //Cancel update
     $("#dataContainer").on("click", "#cancelUpdate", function (event) {
         console.log("Canceled");
+        $("#IndexPageh2").html("Questions You added");
         $(dataContainer).empty();
         showList();
     });
 
+    //Go to update from edit
+    $("#dataContainer").on("click", "#startUpdate", function (event) {
+        $(dataContainer).empty();
+        $("#IndexPageh2").html("Edit question data");
+        const id = ($(this).parent().attr("id"));
+        startSearch("number", id);
+
+    });
+    $("#dataContainer").on("click", "#delete", function (event) {
+        const id = ($(this).parent().attr("id"));
+        if (confirm("Do you want to delete this question?")) {
+            $(dataContainer).empty();
+            console.log("DELETE");
+            deleteQuestionFromEdit(id);
+        }
+
+    });
     function sendDataToUpdate(dataArray) {
         $.ajax({
             url: "..\\DataAccess\\updateAQuestionDA.php",
@@ -80,8 +96,9 @@ $(document).ready(function () {
                 // Clear and show success message
                 $("#EditQuestion-div").empty().css("display", "block");
                 showDialog(response);
+                console.log(response);
                 // Reload the question list
-                showList();
+                showList(response);
             },
             error: function (xhr, status, error) {
                 // Show error message
@@ -92,7 +109,7 @@ $(document).ready(function () {
         });
     }
     //get data from db and show them in table fromat
-    function showList() {
+    function showList(data = "") {
         $.ajax({
             url: "Edit-DeleteQuestions.php",
             method: "POST",
@@ -100,7 +117,10 @@ $(document).ready(function () {
                 action: "SortAscending"
             },
             success: function (response) {
-                $("#dataContainer").html(response);
+                console.log("in success");
+                // $("#dataContainer").html(response);
+                console.log(data);
+                window.location.assign("..\\Pages\\index.php?message=" + data);
             },
             error: function (xhr, status, error) {
                 console.log("AJAX ERROR", error);
@@ -141,6 +161,19 @@ $(document).ready(function () {
             showDialog("Multiple choice questions need at least 2 choices Please enter new choice before deleting");
         }
     });
+
+
+
+    //Check for messages in url
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('message')) {
+        if (urlParams.get('message')) {
+            showDialog(urlParams.get('message'));
+            window.history.replaceState({}, document.title, "/" + "Summer%20Training%201/PHPANDDB//Task1-QuestionsDBUPDATED/Pages/index.php?");
+        }
+    }
+
+
 });
 
 function deleteChoiceFromDB(choiceId) {
@@ -155,6 +188,28 @@ function deleteChoiceFromDB(choiceId) {
             // Show a dialog with deletion success message
             showDialog(`Deleted choice successfully`);
             console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX ERROR: ", error);
+        }
+    });
+
+
+
+}
+// Function to start searching for a question and display it for edit
+function startSearch(searchBy, searchId) {
+    $.ajax({
+        url: "..\\DataAccess\\searchForQuestion.php",
+        method: "GET",
+        data: {
+            action: searchBy,
+            id: searchId
+        },
+        success: function (response) {
+            // Update the data container with the search result
+            $("#dataContainer").html(response);
+            // console.log(response);
         },
         error: function (xhr, status, error) {
             console.log("AJAX ERROR: ", error);
@@ -187,4 +242,24 @@ function validateChoices() {
     }
 
     return true;
+}
+// Function to delete a question
+function deleteQuestionFromEdit(questionId) {
+    $.ajax({
+        url: "..\\Pages\\Edit-DeleteQuestions.php",
+        method: "POST",
+        data: {
+            action: "delete",
+            id: questionId
+        },
+        success: function (response) {
+            // Show a dialog with deletion success message
+            // location.reload();
+            window.location.assign("..\\Pages\\index.php?message=Deleted Question successfully");
+        },
+        error: function (xhr, status, error) {
+            console.log("AJAX ERROR: ", error);
+        }
+    });
+
 }

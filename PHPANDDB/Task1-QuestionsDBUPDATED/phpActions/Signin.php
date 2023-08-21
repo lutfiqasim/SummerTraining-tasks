@@ -22,7 +22,9 @@ class SignIn
         }
         try {
             $conn = new Database();
-            $userData = $conn->read($query, [$useremail, $password]);
+            //md5:128-bit hash value.
+            $encryptedPass = md5($password);
+            $userData = $conn->read($query, [$useremail, $encryptedPass]);
             if ($userData) { //user exists
                 $row = $userData[0];
                 $_SESSION['user_id'] = $row['id'];

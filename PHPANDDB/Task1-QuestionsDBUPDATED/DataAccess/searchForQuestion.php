@@ -8,7 +8,6 @@
 
 include("Database.php");
 include('..\phpActions\searchQuestion.php');
-
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     if (isset($_GET['action']) && isset($_GET['id'])) {
         try {
@@ -97,7 +96,7 @@ function displayAsQuestion($data)
     echo "<noscript>";
     echo "<form method='post' action='updateAQuestionDA.php'>";
     echo "</noscript>";
-    echo "<div class='choicesDiv'>";
+    echo "<div id='{$data[0]['question_id']}' class='choicesDiv' style='min-width:800px'>";
     echo "<h3> {$data[0]['question_syntax']}</h3><br/>";
     $choicesData = array();
     foreach ($data as $entry) {
@@ -107,8 +106,10 @@ function displayAsQuestion($data)
     foreach ($choicesData as $choice) {
         echo (" <input type='radio' id='$choice' name='answer1'value='$choice'/><label class='radioChoices' for='$choice'>{$choice}</label> <br>");
     }
-    echo "<hr/><button id='cancelUpdate' name='action' value='cancelUpdate'>Go back</button>";
-    echo "</div>";
+    echo "<hr/><button id='delete' name='action' value='deleteView'>delete Question</button>";
+    echo "<button id='startUpdate' name='action' value='EditView'>Edit Question</button>";
+    echo "<button id='cancelUpdate' name='action' value='cancelUpdate'>Go back</button>";
+    echo "<hr/></div>";
     echo "<noscript>";
     echo "</form>";
     echo "</noscript>";
@@ -122,7 +123,7 @@ function displayAsQuestion($data)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Display As question</title>
-    
+
     <noscript>
         <style>
             .choicesDiv {

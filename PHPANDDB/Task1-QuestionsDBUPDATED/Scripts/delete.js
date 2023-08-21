@@ -16,6 +16,7 @@ $(document).ready(function () {
     // Event handler for editing a question
     $("#dataContainer").on("click", ".editQuestion", function () {
         // Get the question ID from the HTML
+        $("#IndexPageh2").html("Edit question data");
         const questionId = parseFloat($(this).parent().siblings('.id').html());
         // Start searching for the question with the given ID
         startSearch("number", questionId);
@@ -23,6 +24,7 @@ $(document).ready(function () {
     // Event handler for showing as a question
     $("#dataContainer").on("click", ".ViewQuestion", function () {
         // Get the question ID from the HTML
+        $("#IndexPageh2").html("View a question");
         const questionId = parseFloat($(this).parent().siblings('.id').html());
         // Start searching for the question with the given ID
         displayQuestionFormat("number", questionId);
