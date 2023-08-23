@@ -65,6 +65,58 @@ class GetQuestions
             return "Error accord while getting data:\n" . $e->getMessage();
         }
     }
-}
 
+    public function getQuizQuestions($numberOfQuestions)
+    {
+        try {
+            //Retrive question and answers from data base
+            //Note when using limit by $numberOfQuestions
+            //It retrives random number of questions but less than the limit 
+            //It didn't give the exact amount
+            $query = " 
+            SELECT
+            q.id AS question_id,
+            q.`question-Syntax` AS question_syntax,
+            q.correctAnswer AS correct_answer_id,
+            ca.`answerSyntax` AS correct_answer_syntax,
+            a.id AS choice_id,
+            a.`answerSyntax` AS choice_syntax
+        FROM
+            questions q
+        LEFT JOIN
+            answers ca ON q.correctAnswer = ca.id
+        LEFT JOIN
+            answers a ON q.id = a.questionId
+        ORDER BY RAND()";
+
+            $conn = new Database();
+            $data = $conn->read($query); //,[$numberOfQuestions]
+            return $data;
+
+        } catch (Exception $e) {
+            return "Error accord while retriving questions: " . $e->getMessage();
+        }
+    }
+
+    public function getCorrectAnswers($questionids)
+    {
+        try {
+
+            // $query = "SELECT answerSyntax from answers a JOIN questions q where a.id IN () "; 
+            $placeholders = implode(',', array_fill(0, count($questionids), '?'));
+
+            $query = "SELECT questionId,answerSyntax FROM answers a 
+                      JOIN questions q ON a.id = q.correctAnswer
+                      WHERE q.id IN ($placeholders)";
+
+            $conn = new Database();
+            $data = $conn->read($query, $questionids);
+            return $data;
+
+
+        } catch (Exception $e) {
+            return "Error accord while retriving correctAnswers: " . $e->getMessage();
+        }
+    }
+}
 ?>

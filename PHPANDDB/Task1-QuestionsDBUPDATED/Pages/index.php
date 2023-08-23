@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id'])) {
     $userData = $signin->check_login($_SESSION['user_id']);
 
 } else {
-    header("Location:SignIn.php");
+    header("Location:SignIn.php?message=Please login");
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 function formatHeader($data)
 {
     echo "<div class='user-info'>";
+    echo "<img src='..\..\..\..\..\Social Website\images\user_male.jpg' width='20px'/>";
     echo "<h2 class='user-name'>" . $data['username'] . "</h2>";
     echo "</div>";
     echo "<div class='welcome-message'>";
@@ -43,7 +44,7 @@ function formatHeader($data)
     </header>
     <main>
         <div id="sidebar">
-            <a href="#">Attempt a multiple choice exam</a>
+            <a href="AttemptQuiz.php">Attempt a multiple choice exam</a>
             <a href="SeeAllQuestions.php">View All users questions</a>
             <a href="addQuestion.php">Add new Question</a>
         </div>
