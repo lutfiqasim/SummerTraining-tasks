@@ -1,9 +1,21 @@
 <?php
-$sidebar = "<div id='sidebar'>
-<a href='#'>Attempt a multiple choice exam</a>
-<a href='SeeAllQuestions.php'>View All users questions</a>
-<a href='addQuestion.php'>Add new Question</a>
-</div>";
+function formatSideBar($userType)
+{
+    $sidebar = "";
+    if ($userType) {
+        $sidebar = "<div id='sidebar'>
+        <a href='AttemptQuiz.php?message=Please check questions you want to add to quiz '>Create An exam</a>
+        <a href='SeeAllQuestions.php'>View All users questions</a>
+        <a href='addQuestion.php'>Add new Question</a>
+        </div>";
+    } else {
+        $sidebar = "<div id='sidebar'>
+        <a href='AttemptQuiz.php'>Attempt a multiple choice exam</a>
+        </div>";
+    }
+    echo $sidebar;
+}
+
 function formatHeader($data)
 {
     echo "<div class='user-info'>";
@@ -22,14 +34,17 @@ function formatHeader($data)
 <!-- Implements jquery dependencies -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-      <!-- JQuery and dialogs -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- JQuery and dialogs -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- Dialog -->
 </head>
+
 <body>
-    
+
 </body>
+
 </html>

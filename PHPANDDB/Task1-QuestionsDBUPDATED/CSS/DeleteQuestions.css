@@ -101,19 +101,6 @@ button:hover {
     background-color: #ff5555;
 }
 
-/* 
-.radioChoices {
-    margin: 5px;
-    border: .5px solid #ff5555;
-} */
-
-/* .choicesDiv {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 5px;
-    border: 2px dotted  #ff6666;
-} */
 .choicesDiv {
     border: 1px solid #ccc;
     padding: 10px;
@@ -162,4 +149,18 @@ input[type="number"] {
     min-height: 600px;
     margin-top: 50px;
     color: black;
+}
+button[name='createQuiz']
+{
+    height: 50px;
+    position: fixed;
+    margin-left: 1380px;
+}
+#quizTitle
+{
+    margin-left: 10px;
+    margin-bottom: 750px;
+    width: 110px;
+    /* margin-top: -800px; */
+
 }

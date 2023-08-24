@@ -35,13 +35,13 @@ function validateNumber($numberOfQuestions)
 
 <body>
     <div id="dialog" title='Alert'></div>
-    <section class="questions"> 
+    <section class="questions">
         <h2>Please Answer All questions</h2>
-    <?php
-    if ($questionData != "") {
-        echo $questionData;
-    }
-    ?>
+        <?php
+        if ($questionData != "") {
+            echo $questionData;
+        }
+        ?>
     </section>
 </body>
 

@@ -5,11 +5,11 @@ include("..\phpActions\Signin.php");
 
 $signin = new SignIn();
 $result = "";
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     //If check login is successful return to index page
     $data = $signin->check_login($_SESSION['user_id']);
     // print_r($data);
-    if($data){
+    if ($data) {
         header("Location:index.php");
     }
 }

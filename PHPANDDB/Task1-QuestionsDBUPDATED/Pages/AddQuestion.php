@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+//Student user isn't allowed to Add questions
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == 0) {
+    header("Location:index.php?message=Access denied for entered URL");
+    die();
+}
+
 ?>
 <!-- 
 Add questions page HTML

@@ -2,8 +2,9 @@
 session_start();
 include("..\DataAccess\Database.php");
 include("..\phpActions\Signin.php");
+include_once("Header-SideBar.php");
 $userData = "";
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
 
@@ -11,10 +12,10 @@ if (isset($_SESSION['user_id'])) {
     header("Location:SignIn.php?message=Please login");
 }
 
-if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    print_r($_POST);
-}
-function formatHeader($data)
+// if ($_SERVER['REQUEST_METHOD'] == "POST") {
+//     print_r($_POST);
+// }
+function formatIndexHeader($data)
 {
     echo "<div class='user-info'>";
     echo "<img src='..\..\..\..\..\Social Website\images\user_male.jpg' width='20px'/>";
@@ -40,18 +41,26 @@ function formatHeader($data)
 
 <body>
     <header>
-        <?php formatHeader($userData) ?>
+        <?php formatIndexHeader($userData) ?>
     </header>
     <main>
-        <div id="sidebar">
+        <?php
+        formatSideBar($_SESSION['role']);
+        ?>
+        <!-- <div id="sidebar">
             <a href="AttemptQuiz.php">Attempt a multiple choice exam</a>
             <a href="SeeAllQuestions.php">View All users questions</a>
             <a href="addQuestion.php">Add new Question</a>
-        </div>
+        </div> -->
         <section id='content'>
             <h2 id='IndexPageh2'>Questions You added</h2>
             <?php
-            include_once("Edit-DeleteQuestions.php");
+                if($userData['role'] == 1)
+                    include_once("Edit-DeleteQuestions.php");
+                else{
+                    echo "<br/><hr/>";
+                    echo "<div style='font-size:18px;color:red;'><p>Try attempting one of our exams</p></div>";
+                }
             ?>
 
         </section>

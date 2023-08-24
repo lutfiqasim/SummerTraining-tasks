@@ -5,15 +5,15 @@
  * 
  */
 include_once("..\DataAccess\Database.php");
-include('..\phpActions\DeleteQuestions.php');
-include('..\phpActions\GetQuestions.php');
+include_once('..\phpActions\DeleteQuestions.php');
+include_once('..\phpActions\GetQuestions.php');
 include_once("..\phpActions\Signin.php");
-if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == 1) {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
 
 } else {
-    header("Location:SignIn.php");
+    header("Location:index.php?message=Redirecting here");
 }
 function displayData()
 {
@@ -63,7 +63,7 @@ function displayFormat($questions)
         echo "<form method='get' action='..\DataAccess\searchForQuestion.php'> ";
         echo "<tr>";
         echo "<td class='id'>" . $question['id'] . "</td>";
-        echo "<input type='text' id='DataId' name='id' style='display:none' value={$question['id']}/>";
+        echo "<input type='text' class='DataId' name='id' style='display:none' value={$question['id']}/>";
         echo "<td>" . $question['question-Syntax'] . "</td>";
         echo "<td><noscript><button type='submit' name='action' value='ShowAsQuestion'></noscript><span class ='ViewQuestion'>View</span><noscript></button></noscript></td>";
         echo "<td> <noscript><button type='submit' name='action' value='editQuestion'></noscript><span class='editQuestion'>Edit</span><noscript></button></noscript></td>";

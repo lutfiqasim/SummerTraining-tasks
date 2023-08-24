@@ -1,9 +1,14 @@
 <?php
+session_start();
 include_once("..\DataAccess\Database.php");
 include_once('..\phpActions\DeleteQuestions.php');
 include_once('..\phpActions\GetQuestions.php');
 
-
+//Student user isn't allowed to Add questions
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == 0) {
+    header("Location:SignIn.php?message=Access denied for entered URL");
+    die();
+}
 function displayUserData()
 {
     $getData = new GetQuestions();

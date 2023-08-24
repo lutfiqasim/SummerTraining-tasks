@@ -28,6 +28,7 @@ class SignIn
             if ($userData) { //user exists
                 $row = $userData[0];
                 $_SESSION['user_id'] = $row['id'];
+                $_SESSION['role'] = $row['role'];
             } else {
                 $this->error .= "Invalid email or password";
             }
