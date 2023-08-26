@@ -16,7 +16,7 @@ function getQuestions($numberOfQuestions)
 function displayAsQuestion($data)
 {
     $formatedData = "<noscript>
-    <form method='post' action='updateAQuestionDA.php'></noscript>
+    <form method='post' action='checkAnsweredQuestions.php'></noscript>
     <div id='{$data[0]['question_id']}' class='choicesDiv' style='min-width:800px'><h3> {$data[0]['question_syntax']}</h3><br/>";
 
     $choicesData = array();

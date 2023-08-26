@@ -3,8 +3,8 @@ include_once("..\DataAccess\StartQuizDA.php");
 $questionData = "";
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     if (isset($_POST['quiz_id'])) {
-        $numberOfQuestions = $_POST['quiz_id'];
-        $questionData = getQuestions($numberOfQuestions);
+        $quiz_id = $_POST['quiz_id'];
+        $questionData = getQuestions($quiz_id);
     }
 }
 ?>
@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="..\CSS\DeleteQuestions.css" />
+    <link type="text/css" rel="stylesheet" href="..\CSS\QuizResult.css" />
     <!-- JQuery and dialogs -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">

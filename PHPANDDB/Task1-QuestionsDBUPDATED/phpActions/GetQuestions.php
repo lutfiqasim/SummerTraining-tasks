@@ -110,7 +110,7 @@ class GetQuestions
             // $query = "SELECT answerSyntax from answers a JOIN questions q where a.id IN () "; 
             $placeholders = implode(',', array_fill(0, count($questionids), '?'));
 
-            $query = "SELECT questionId,answerSyntax FROM answers a 
+            $query = "SELECT questionId,`question-Syntax`,answerSyntax FROM answers a 
                       JOIN questions q ON a.id = q.correctAnswer
                       WHERE q.id IN ($placeholders)";
 
