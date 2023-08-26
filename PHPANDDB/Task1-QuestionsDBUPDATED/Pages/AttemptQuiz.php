@@ -4,6 +4,7 @@ include("..\DataAccess\Database.php");
 include("..\phpActions\Signin.php");
 include_once("Header-SideBar.php");
 include_once('..\phpActions\GetQuestions.php');
+include_once ("..\DataAccess\GetQuizesDA.php");
 $userData = "";
 if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     $signin = new SignIn();
@@ -56,8 +57,7 @@ function displayFormat($questions)
 }
 function displayAttemptQuiz()
 {
-    $form = "<div>This page will be created soon!!!</div>";
-    echo $form;
+    displayQuizesFormat();
 }
 ?>
 
@@ -75,6 +75,7 @@ function displayAttemptQuiz()
         echo "<link type='text/css' rel='stylesheet' href='..\CSS\DeleteQuestions.css' />";
         // echo "<link type='text/javascript' href='..\Scripts\createAQuiz.js' defer='defer'/>";
     }
+    
     ?>
     <title>Start Quiz</title>
 
@@ -101,9 +102,6 @@ function displayAttemptQuiz()
             displayAttemptQuiz();
         }
         ?>
-
-
-
     </main>
 </body>
 

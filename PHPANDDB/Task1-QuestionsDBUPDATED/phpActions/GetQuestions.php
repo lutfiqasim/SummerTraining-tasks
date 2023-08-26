@@ -66,7 +66,13 @@ class GetQuestions
         }
     }
 
-    public function getQuizQuestions($numberOfQuestions)
+    /**
+     * Summary of getQuizQuestions
+     * @param mixed $numberOfQuestions
+     * @return array|string
+     */
+    // Not used
+    public function getRandomQuestions($numberOfQuestions)
     {
         try {
             //Retrive question and answers from data base
@@ -97,7 +103,6 @@ class GetQuestions
             return "Error accord while retriving questions: " . $e->getMessage();
         }
     }
-
     public function getCorrectAnswers($questionids)
     {
         try {

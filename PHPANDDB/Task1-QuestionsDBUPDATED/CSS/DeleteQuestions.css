@@ -150,14 +150,14 @@ input[type="number"] {
     margin-top: 50px;
     color: black;
 }
-button[name='createQuiz']
-{
+
+button[name='createQuiz'] {
     height: 50px;
     position: fixed;
-    margin-left: 1380px;
+    margin-left: 1500px;
 }
-#quizTitle
-{
+
+#quizTitle {
     margin-left: 10px;
     margin-bottom: 750px;
     width: 110px;

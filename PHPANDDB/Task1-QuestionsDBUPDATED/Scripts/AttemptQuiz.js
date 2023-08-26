@@ -41,8 +41,12 @@ $(document).ready(function () {
             },
             success: function (response) {
                 // Update the data container with the search result
-                showDialog(response);
+                // showDialog(response);
                 // console.log(response);
+                if(confirm(response)){
+                    
+                }
+                location.reload();
             },
             error: function (xhr, status, error) {
                 console.log("AJAX ERROR: ", error);

@@ -17,7 +17,7 @@ class CreateQuiz
             $conn = new Database();
             $this->error = $conn->write($query, [$title, $userId]);
             $questionId = $this->getLastInsertedQuiz($title);
-            return $this->insertQuestions($data, $questionId[0]['id']);
+            $this->insertQuestions($data, $questionId[0]['id']);
         } catch (Exception $e) {
             if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
                 $err = "The quiz name already exists in the database. please enter another name";

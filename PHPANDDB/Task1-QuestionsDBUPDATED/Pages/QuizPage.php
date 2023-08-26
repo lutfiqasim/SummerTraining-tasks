@@ -2,18 +2,9 @@
 include_once("..\DataAccess\StartQuizDA.php");
 $questionData = "";
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['numberOfQuestions'])) {
-        $numberOfQuestions = $_POST['numberOfQuestions'];
-        validateNumber($numberOfQuestions);
+    if (isset($_POST['quiz_id'])) {
+        $numberOfQuestions = $_POST['quiz_id'];
         $questionData = getQuestions($numberOfQuestions);
-    }
-}
-function validateNumber($numberOfQuestions)
-{
-
-    if ($numberOfQuestions > 15 || $numberOfQuestions < 0) {
-        header("Location:AttemptQuiz.php?message=Number of questions should be in range of 1-15");
-        die();
     }
 }
 ?>

@@ -53,14 +53,16 @@ function formatIndexHeader($data)
             <a href="addQuestion.php">Add new Question</a>
         </div> -->
         <section id='content'>
-            <h2 id='IndexPageh2'>Questions You added</h2>
+
             <?php
-                if($userData['role'] == 1)
-                    include_once("Edit-DeleteQuestions.php");
-                else{
-                    echo "<br/><hr/>";
-                    echo "<div style='font-size:18px;color:red;'><p>Try attempting one of our exams</p></div>";
-                }
+            if ($userData['role'] == 1) {
+                include_once("Edit-DeleteQuestions.php");
+                echo "<h2 id='IndexPageh2'>Questions You added</h2>";
+            } else {
+                echo "<h2 id='IndexPageh2'>Welcome ".$userData['username']."</h2>";
+                echo "<br/><hr/>";
+                echo "<div style='font-size:18px;color:red;'><p><a href='https://localhost/Summer%20Training%201/PHPANDDB//Task1-QuestionsDBUPDATED/Pages/AttemptQuiz.php'>Try attempting one of our exams</a></p></div>";
+            }
             ?>
 
         </section>

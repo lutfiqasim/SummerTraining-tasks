@@ -1,3 +1,4 @@
+
 .quiz-container {
     text-align: center;
     background-color: white;
@@ -39,5 +40,41 @@ button {
 }
 
 button:hover {
+    background-color: #0056b3;
+}
+/* For forms of attempting quiz */
+
+/* Style for each card */
+.quizes-div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    /* height: 50vh; */
+    width: 50%;
+    margin: 0 auto;
+}
+.form-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width as needed */
+    background-color: #fff;
+}
+
+/* Style for the "Start Quiz" button */
+.form-card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+/* Hover effect for the button */
+.form-card button:hover {
     background-color: #0056b3;
 }

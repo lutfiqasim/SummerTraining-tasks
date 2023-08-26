@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
             $createquiz = new CreateQuiz();
             $q = $createquiz->createQuiz($_POST);
             if ($q) {
-                header("Location:..\AttemptQuiz.php?message=Added question succesffully");
+                // header("Location:..\Pages\AttemptQuiz.php?message=Added question succesffully");
+                echo "Added quiz successfully";
             }
         } catch (Exception $e) {
             echo $e->getMessage();
