@@ -1,15 +1,22 @@
 <?php
 include_once("Database.php");
 include_once('..\phpActions\GetQuiz.php');
-function getQuestions($numberOfQuestions)
+function getQuestions($quiz_id, $displayAsQuiz = true)
 {
     $getQuestions = new GetQuiz();
-    $Questiondata = $getQuestions->getQuiz($numberOfQuestions);
+    $Questiondata = $getQuestions->getQuiz($quiz_id);
     $dataToDisplay = "";
-    foreach ($Questiondata as $data) {
-        $dataToDisplay .= displayAsQuestion($data);
+    if ($displayAsQuiz) { //Display as a quiz for user
+        foreach ($Questiondata as $data) {
+            $dataToDisplay .= displayAsQuestion($data);
+        }
+        $dataToDisplay .= "<button id='SubmitAnswers' name='submit' value='submit'>Submit Answers</button>";
+    } else { //display for edit for Teacher
+        foreach ($Questiondata as $data) {
+            $dataToDisplay .= displayForEdit($data);
+        }
+        $dataToDisplay .= "<a href='index.php'>Go back to the main Page</a></div>";
     }
-    $dataToDisplay .= "<button id='SubmitAnswers' name='submit' value='submit'>Submit Answers</button>";
     return $dataToDisplay;
 }
 
@@ -37,6 +44,30 @@ function displayAsQuestion($data)
     </noscript>";
     return $formatedData;
 }
+function displayForEdit($data)
+{
+    $formatedData = "<noscript>
+    <form method='post' action='#'></noscript>
+    <div id='{$data[0]['question_id']}' class='choicesDiv' style='min-width:800px'>" . "<span class='deletequestion'>×</span>" . "<h3>{$data[0]['question_syntax']}</h3>" . "<br/>";
+    $choicesData = array();
+    foreach ($data as $entry) {
+        $choicesData[] = $entry['choice_syntax'];
+    }
+
+    shuffle($choicesData);
+
+    foreach ($choicesData as $choice) {
+        $formatedData .= " <input type='radio' id='$choice' name='{$data[0]['question_id']}' value='$choice'/><label class='radioChoices' for='$choice'>{$choice}</label> <br>";
+    }
+
+    $formatedData .= "
+    <hr/></div>
+    <noscript>
+    </form>
+    </noscript>";
+    return $formatedData;
+}
+
 
 
 

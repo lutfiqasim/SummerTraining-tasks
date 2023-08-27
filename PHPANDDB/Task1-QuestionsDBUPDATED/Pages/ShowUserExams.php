@@ -6,7 +6,7 @@ include_once("Header-SideBar.php");
 include_once('..\phpActions\GetQuestions.php');
 include_once("..\DataAccess\GetQuizesDA.php");
 $userData = "";
-if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] ==1) {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
 

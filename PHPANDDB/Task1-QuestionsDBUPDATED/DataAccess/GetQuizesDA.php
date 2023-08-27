@@ -30,17 +30,21 @@ function displayCurrentUserQuizes($userId)
     $quizesData = $getQuizes->retriveCurrentUserQuizes($userId);
     // Loop through each retrieved quiz data and generate HTML forms
     echo '<div class="quizes-div">';
-    foreach ($quizesData as $quizData) {
-        $quizId = $quizData['id'];
-        $quizName = $quizData['quiz_name'];
-        $addedByUsername = $quizData['user_name'];
-        echo '<form class="form-card" action="EditDeleteQuiz.php" method="post">';
-        echo '<input type="hidden" name="quiz_id" value="' . $quizId . '">'; // Hidden field for quiz ID
-        echo '<p>Quiz Name: ' . $quizName . '</p>';
-        echo '<p>Added by: ' . $addedByUsername . '</p>';
-        echo '<button type="submit" name="Show">Show/Edit</button>';
-        echo '<button id="deleteQuiz" type="submit"  name="val" value ="Delete">Delete Quiz</button>';
-        echo '</form>';
+    if (count($quizesData) > 0) {
+        foreach ($quizesData as $quizData) {
+            $quizId = $quizData['id'];
+            $quizName = $quizData['quiz_name'];
+            $addedByUsername = $quizData['user_name'];
+            echo '<form class="form-card" action="EditDeleteQuiz.php" method="post">';
+            echo '<input type="hidden" name="quiz_id" value="' . $quizId . '">'; // Hidden field for quiz ID
+            echo '<p>Quiz Name: ' . $quizName . '</p>';
+            echo '<p>Added by: ' . $addedByUsername . '</p>';
+            echo '<button type="submit" name="val" value ="Show">Show/Edit</button>';
+            echo '<button id="deleteQuiz" type="submit"  name="val" value ="Delete">Delete Quiz</button>';
+            echo '</form>';
+        }
+    } else {
+        echo "<p style='font-size:24px;color:Green;margin-top:30px;padding:10px'>You have not created any exams yet !!!</p>";
     }
     echo '</div>';
 
