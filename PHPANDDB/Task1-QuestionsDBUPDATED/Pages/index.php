@@ -56,8 +56,8 @@ function formatIndexHeader($data)
 
             <?php
             if ($userData['role'] == 1) {
-                include_once("Edit-DeleteQuestions.php");
                 echo "<h2 id='IndexPageh2'>Questions You added</h2>";
+                include_once("Edit-DeleteQuestions.php");
             } else {
                 echo "<h2 id='IndexPageh2'>Welcome ".$userData['username']."</h2>";
                 echo "<br/><hr/>";

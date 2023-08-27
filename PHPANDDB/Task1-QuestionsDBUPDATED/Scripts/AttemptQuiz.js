@@ -43,7 +43,7 @@ $(document).ready(function () {
                 // Update the data container with the search result
                 // showDialog(response);
                 // console.log(response);
-                if(confirm(response)){
+                if(confirm("Created quiz successfully")){
                     
                 }
                 location.reload();

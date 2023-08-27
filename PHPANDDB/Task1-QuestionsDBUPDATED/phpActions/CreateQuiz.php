@@ -44,6 +44,17 @@ class CreateQuiz
 
         }
     }
+
+
+    public function DeleteQuiz($quizId)
+    {
+        try{
+            $query = "Delete * question";
+        }catch(Exception $e){
+            throw new Exception("Error Deleting question: ".$e->getMessage());
+            
+        }
+    }
     private function getLastInsertedQuiz($data)
     {
         $conn = new Database();

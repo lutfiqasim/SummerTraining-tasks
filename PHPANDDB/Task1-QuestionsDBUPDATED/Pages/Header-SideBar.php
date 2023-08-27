@@ -5,6 +5,7 @@ function formatSideBar($userType)
     if ($userType) {
         $sidebar = "<div id='sidebar'>
         <a href='AttemptQuiz.php?message=Please check questions you want to add to quiz '>Create An exam</a>
+        <a href='ShowUserExams.php?'>Show my exams</a>
         <a href='SeeAllQuestions.php'>View All users questions</a>
         <a href='addQuestion.php'>Add new Question</a>
         </div>";

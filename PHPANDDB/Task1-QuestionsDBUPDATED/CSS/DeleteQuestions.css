@@ -142,7 +142,7 @@ input[type="number"] {
 button[name='createQuiz'] {
     height: 50px;
     position: fixed;
-    margin-left: 1500px;
+    margin-left: 1300px;
 }
 
 #quizTitle {
