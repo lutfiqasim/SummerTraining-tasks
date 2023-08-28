@@ -2,16 +2,16 @@
 function formatSideBar($userType)
 {
     $sidebar = "";
-    if ($userType) {
+    if ($userType == "Teacher") {
         $sidebar = "<div id='sidebar'>
-        <a href='AttemptQuiz.php?message=Please check questions you want to add to quiz '>Create An exam</a>
+        <a href='CreateAQuiz.php?'>Create An exam</a>
         <a href='ShowUserExams.php?'>Show my exams</a>
         <a href='SeeAllQuestions.php'>View All users questions</a>
         <a href='addQuestion.php'>Add new Question</a>
         </div>";
     } else {
         $sidebar = "<div id='sidebar'>
-        <a href='AttemptQuiz.php'>Attempt a multiple choice exam</a>
+        <a href='AttemptQuiz2.php'>Attempt a multiple choice exam</a>
         </div>";
     }
     echo $sidebar;

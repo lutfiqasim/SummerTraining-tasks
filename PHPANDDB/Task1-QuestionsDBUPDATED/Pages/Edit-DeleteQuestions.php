@@ -8,7 +8,7 @@ include_once("..\DataAccess\Database.php");
 include_once('..\phpActions\DeleteQuestions.php');
 include_once('..\phpActions\GetQuestions.php');
 include_once("..\phpActions\Signin.php");
-if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == 1) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == "Teacher") {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
 

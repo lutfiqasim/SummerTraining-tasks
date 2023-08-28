@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         validateRequest($_POST['title'], $questionsToAdd);
         try {
             $createquiz = new CreateQuiz();
+            // print_r($_POST['data']);
             $q = $createquiz->createQuiz($_POST);
             if ($q) {
                 // header("Location:..\Pages\AttemptQuiz.php?message=Added question succesffully");
@@ -22,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 function validateRequest($title, $data)
 {
     if ($title == "") {
-        header("Location:..\AttemptQuiz.php?message=enter title first");
+        header("Location:..\Pages\CreateAQuiz.php?message=enter title first");
         die();
     }
-    if (count($data) < 5) {
-        header("Location:..\AttemptQuiz.php?message=Must specify at least 5 questions");
+    if (count($data) <=0) {
+        header("Location:..\Pages\CreateAQuiz.php?message=Must specify at least 1 question");
         die();
     }
 }

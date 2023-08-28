@@ -5,7 +5,8 @@ function getQuestions($quiz_id, $displayAsQuiz = true)
 {
     $getQuestions = new GetQuiz();
     $Questiondata = $getQuestions->getQuiz($quiz_id);
-    $dataToDisplay = "";
+    $quizTitle = $getQuestions->getQuizData($quiz_id);
+    $dataToDisplay = "<section style='margin-left:45%;margin-bottom:20px;font-size:28px'>Quiz: " . $quizTitle . "</section>";
     if ($displayAsQuiz) { //Display as a quiz for user
         foreach ($Questiondata as $data) {
             $dataToDisplay .= displayAsQuestion($data);
@@ -15,6 +16,20 @@ function getQuestions($quiz_id, $displayAsQuiz = true)
         foreach ($Questiondata as $data) {
             $dataToDisplay .= displayForEdit($data);
         }
+        $dataToDisplay .= " <div id='Add-new-Quiz-Question-Form' style='display:none;'><form method='post' id='quiz-form'>
+        <label for='question-list'>Select Question:</label>
+        <select id='question-list' required>
+            <option value='' disabled selected>Select a question</option><br>
+            <!-- Question options will be added here using JavaScript(AttemptQuiz) -->
+        </select>
+        <button id='add-question-btn'>Add Question</button>
+        <div id='choosen-question-toAdd' style='border:1px solid green;margin-top:10px;max-width:400px;'>
+            <ul style='padding:10px;' id='added-questions'>
+            </ul>
+        </div>
+        <button id='create-quiz-btn'>AddToQuiz</button>
+    </form></div>";
+        $dataToDisplay .= "<button id='AddNewQuestion' name='Addquestion'>Add a question</button>";
         $dataToDisplay .= "<a href='index.php'>Go back to the main Page</a></div>";
     }
     return $dataToDisplay;

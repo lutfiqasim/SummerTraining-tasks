@@ -138,17 +138,18 @@ input[type="number"] {
     border-radius: 3px;
 }
 
-
-button[name='createQuiz'] {
-    height: 50px;
-    position: fixed;
-    margin-left: 1300px;
+#quiz-form {
+    margin: 100px 0;
 }
 
-#quizTitle {
-    margin-left: 10px;
-    margin-bottom: 750px;
-    width: 110px;
-    /* margin-top: -800px; */
-
+select {
+    min-width: 200px;
+    min-height: 30px;
+}
+.deleteChoice{
+    cursor: pointer;
+}
+.deleteChoice:hover{
+    color: red;
+    font-size: larger;
 }

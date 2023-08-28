@@ -2,7 +2,7 @@
 
 class EditQuizes
 {
-    private $eror = "";
+    private $error = "";
 
     public function deleteCurrentQuiz($quizId)
     {
@@ -33,6 +33,29 @@ class EditQuizes
 
         } catch (Exception $e) {
             throw new Exception("Error Removing question", 1);
+
+        }
+    }
+
+    public function addNewQuestionsToQuiz($quizId, $questionIds)
+    {
+        try {
+            if (empty($quizId) || empty($questionIds)) {
+                throw new Exception("Question not found", 1);
+            }
+            $query = "INSERT INTO quizes_questions (quizId,questionId) VALUES (?,?)";
+            $conn = new Database();
+            foreach ($questionIds as $questoinId) {
+                $this->error .= $conn->write($query, [$quizId, $questoinId]);
+            }
+            if ($this->error == "") {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception $e) {
+            throw new Exception("Error Adding new questions: " . $e->getMessage());
 
         }
     }

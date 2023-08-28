@@ -18,6 +18,7 @@ class CreateQuiz
             $this->error = $conn->write($query, [$title, $userId]);
             $questionId = $this->getLastInsertedQuiz($title);
             $this->insertQuestions($data, $questionId[0]['id']);
+            return true;
         } catch (Exception $e) {
             if (strpos($e->getMessage(), 'Duplicate entry') !== false) {
                 $err = "The quiz name already exists in the database. please enter another name";
@@ -36,7 +37,7 @@ class CreateQuiz
             $query = "INSERT INTO quizes_questions (quizId,questionId) VALUES (?,?)";
             $conn = new Database();
             foreach ($questionToAdd as $question) {
-                $conn->write($query, [$questionId, $question]);
+                $conn->write($query, [$questionId, $question['key']]);
             }
             return true;
         } catch (Exception $e) {

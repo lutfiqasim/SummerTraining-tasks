@@ -8,7 +8,7 @@
 </head>
 
 <body>
-
+    
     <?php
     include_once("Database.php");
     include_once("..\phpActions\GetQuestions.php");
@@ -26,7 +26,7 @@
                 $getAnswer = new GetQuestions();
                 $correctAnswers = ($getAnswer->getCorrectAnswers($idvalues));
                 $score = checkScore($questionData, $correctAnswers);
-                echo "<div id='score-div'><p>Your score is: $score</p></div>";
+                echo "<div id='score-div'><p>Your score is: $score out of " . (count($questionData) * 10) . "</p></div>";
 
                 // Display question-answer cards
                 foreach ($questionData as $value) {

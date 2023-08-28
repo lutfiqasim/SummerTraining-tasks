@@ -4,6 +4,19 @@ class GetQuiz
 {
     private $error = "";
 
+
+    public function getQuizData($quiz_id)
+    {
+        try {
+            $query = "SELECT name FROM quizes WHERE id =?";
+            $conn = new Database();
+            $data = $conn->read($query,[$quiz_id]);
+            return $data[0]['name'];
+        } catch (Exception $e) {
+            throw new Exception("Error Processing Request", 1);
+
+        }
+    }
     public function getQuiz($quizId)
     {
         try {
@@ -26,9 +39,8 @@ class GetQuiz
 
             $data = [];
             $conn = new Database();
-            foreach($qustionIds as $question )
-            {
-                $data[] =  $conn->read($query,[$question]);
+            foreach ($qustionIds as $question) {
+                $data[] = $conn->read($query, [$question]);
             }
 
             return $data;

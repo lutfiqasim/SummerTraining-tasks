@@ -5,9 +5,15 @@ include_once('..\phpActions\DeleteQuestions.php');
 include_once('..\phpActions\GetQuestions.php');
 
 //Student user isn't allowed to Add questions
-if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == 0) {
-    header("Location:SignIn.php?message=Access denied for entered URL");
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) ) {
+    if($_SESSION['role'] !=="Teacher"){
+        header("Location:SignIn.php?message=Access denied for entered URL");
+        die();
+    }
+}else {
+    header("Location:SignIn.php?message=");
     die();
+
 }
 function displayUserData()
 {

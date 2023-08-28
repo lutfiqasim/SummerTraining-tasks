@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <body>
     <div id="dialog" title='warning'></div>
-    <div id='quizId' value='<?php echo $_POST['quiz_id']?>' style='display:none;'></div>
+    <div id='quizId' value='<?php echo $_POST['quiz_id'] ?>' style='display:none;'></div>
 </body>
 
 </html>

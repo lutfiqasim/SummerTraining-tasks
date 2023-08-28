@@ -123,5 +123,21 @@ class GetQuestions
             return "Error accord while retriving correctAnswers: " . $e->getMessage();
         }
     }
+
+    public function getQuestionsAsOptions()
+    {
+        try {
+            $query = "SELECT id,`question-Syntax` from questions";
+            $conn = new Database();
+            $data = $conn->read($query);
+            if ($this->error == "") {
+                return $data;
+            } else {
+                return $this->error;
+            }
+        } catch (Exception $e) {
+            return "Error accord while getting data:\n" . $e->getMessage();
+        }
+    }
 }
 ?>
