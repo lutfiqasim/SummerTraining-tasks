@@ -30,7 +30,7 @@ function getQuestions($quiz_id, $displayAsQuiz = true)
         <button id='create-quiz-btn'>AddToQuiz</button>
     </form></div>";
         $dataToDisplay .= "<button id='AddNewQuestion' name='Addquestion'>Add a new question</button>";
-        $dataToDisplay .= "<a href='index.php'>Go back to the main Page</a></div>";
+        $dataToDisplay .= "<a href='ShowUserExams.php'>Go back Exam page</a></div>";
     }
     return $dataToDisplay;
 }

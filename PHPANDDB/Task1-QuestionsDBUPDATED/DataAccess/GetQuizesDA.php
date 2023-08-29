@@ -45,10 +45,18 @@ function displayCurrentUserQuizes($userId)
             $quizId = $quizData['id'];
             $quizName = $quizData['quiz_name'];
             $addedByUsername = $quizData['user_name'];
+            $getPreviousAttempts = new SaveAttempts($userId, $quizId);
+            $numberOfParticipants = $getPreviousAttempts->numberOfparticipantsOfQuiz($quizId);
+
+            $scoreStats = $getPreviousAttempts->getScoresStats($quizId);
+            $totalScore = $scoreStats['totalQuestions'] * 10;
             echo '<form class="form-card" action="EditDeleteQuiz.php" method="post">';
             echo '<input type="hidden" name="quiz_id" value="' . $quizId . '">'; // Hidden field for quiz ID
             echo '<p>Quiz Name: ' . $quizName . '</p>';
             echo '<p>Added by: ' . $addedByUsername . '</p>';
+            echo "<p>number of participants: $numberOfParticipants</p>";
+            echo "<p>Best Score: {$scoreStats['maxBestScore']} / $totalScore</p>";
+            echo "<p>Avg score of last attempts: {$scoreStats['averageLastScore']} / $totalScore</p>";
             echo '<button type="submit" name="val" value ="Show">Show/Edit</button>';
             echo '<button id="deleteQuiz" type="submit"  name="val" value ="Delete">Delete Quiz</button>';
             echo '</form>';

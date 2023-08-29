@@ -15,6 +15,7 @@ class SaveAttempts
         //Check whether user has attempt this quiz before or not
         $this->firstAttempt = $this->modifyAttempts($userId, $quiz_id);
     }
+    
     private function modifyAttempts($userid, $quiz_id)
     {
         try {
@@ -34,7 +35,7 @@ class SaveAttempts
     public function saveAttemptData($quizId, $userid, $newAttemptScore, $newAttemptAnswers)
     {
         try {
-            if (empty($quizId) || empty($userid) || (empty($newAttemptScore) && $newAttemptScore !=0)|| empty($newAttemptAnswers)) {
+            if (empty($quizId) || empty($userid) || (empty($newAttemptScore) && $newAttemptScore != 0) || empty($newAttemptAnswers)) {
                 throw new Exception("Data Missing here", 1);
             }
             $conn = new Database();
@@ -163,6 +164,40 @@ class SaveAttempts
 
         }
     }
+
+    public function numberOfparticipantsOfQuiz($quiz_id)
+    {
+        try{
+            $query = "SELECT COUNT(*) as participantNO FROM user_quizes_log WHERE quizId = ? ";
+            $conn = new Database();
+            $result = $conn->read($query,[$quiz_id]);
+            return $result[0]['participantNO'];
+        }catch(Exception $e)
+        {
+            throw new Exception("Error getting count",1);
+        }
+    }
+
+    public function getScoresStats($quiz_id)
+{
+    try {
+        $query = "SELECT AVG(last_Attempt_Score) as avgLastScore, MAX(best_Attempt_Score) as maxBestScore FROM user_quizes_log WHERE quizId = ?";
+        $numberOfQuestionsQuery = "SELECT COUNT(*) as numberOfquestions FROM quizes_questions WHERE quizId = ? ";
+        $conn = new Database();
+        $avgScore_MAxScore = $conn->read($query, [$quiz_id]);
+        $totalQuestions = $conn->read($numberOfQuestionsQuery,[$quiz_id]);
+        $stats = array(
+            'averageLastScore' => $avgScore_MAxScore[0]['avgLastScore'],
+            'maxBestScore' => $avgScore_MAxScore[0]['maxBestScore'],
+            'totalQuestions' => $totalQuestions[0]['numberOfquestions']
+        );
+        
+        return $stats;
+    } catch (Exception $e) {
+        throw new Exception("Error getting scores stats", 1);
+    }
+}
+
 
 
 }

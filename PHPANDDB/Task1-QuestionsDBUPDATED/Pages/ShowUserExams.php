@@ -6,7 +6,7 @@ include_once("Header-SideBar.php");
 include_once('..\phpActions\GetQuestions.php');
 include_once("..\DataAccess\GetQuizesDA.php");
 $userData = "";
-if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] =="Teacher") {
+if (isset($_SESSION['user_id']) && isset($_SESSION['role']) && $_SESSION['role'] == "Teacher") {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
 
@@ -44,10 +44,10 @@ function displayFormat()
         <?php formatHeader($userData) ?>
     </header>
     <main>
-        
+
         <?php
         formatSideBar($_SESSION['role']);
-        
+
         if ($_SESSION['role'] == "Teacher") {
             displayFormat();
         } else {
