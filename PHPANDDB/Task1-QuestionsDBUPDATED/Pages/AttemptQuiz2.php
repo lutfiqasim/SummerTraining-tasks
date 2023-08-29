@@ -9,7 +9,6 @@ $userData = "";
 if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
-
 } else {
     header("Location:SignIn.php?message=Please login");
 }

@@ -4,9 +4,9 @@ include_once('..\phpActions\GetQuiz.php');
 function getQuestions($quiz_id, $displayAsQuiz = true)
 {
     $getQuestions = new GetQuiz();
-    $Questiondata = $getQuestions->getQuiz($quiz_id);
     $quizTitle = $getQuestions->getQuizData($quiz_id);
-    $dataToDisplay = "<section style='margin-left:45%;margin-bottom:20px;font-size:28px'>Quiz: " . $quizTitle . "</section>";
+    $Questiondata = $getQuestions->getQuiz($quiz_id);
+    $dataToDisplay = "<section id='quizId' value='$quiz_id' style='margin-left:45%;margin-bottom:20px;font-size:28px'>Quiz: " . $quizTitle . "</section>";
     if ($displayAsQuiz) { //Display as a quiz for user
         foreach ($Questiondata as $data) {
             $dataToDisplay .= displayAsQuestion($data);
@@ -29,7 +29,7 @@ function getQuestions($quiz_id, $displayAsQuiz = true)
         </div>
         <button id='create-quiz-btn'>AddToQuiz</button>
     </form></div>";
-        $dataToDisplay .= "<button id='AddNewQuestion' name='Addquestion'>Add a question</button>";
+        $dataToDisplay .= "<button id='AddNewQuestion' name='Addquestion'>Add a new question</button>";
         $dataToDisplay .= "<a href='index.php'>Go back to the main Page</a></div>";
     }
     return $dataToDisplay;

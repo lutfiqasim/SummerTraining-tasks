@@ -2,9 +2,12 @@
 include_once("..\DataAccess\StartQuizDA.php");
 $questionData = "";
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
-    if (isset($_POST['quiz_id'])) {
+    if (isset($_POST['quiz_id'],$_POST['start'])) {
         $quiz_id = $_POST['quiz_id'];
         $questionData = getQuestions($quiz_id);
+    }else{
+        header("Location:PreviousAttempts.php?quiz=".$_POST['quiz_id']."&requested=".$_POST['attempt']);
+        exit();
     }
 }
 ?>
@@ -32,6 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         <?php
         if ($questionData != "") {
             echo $questionData;
+        }else{
+            
         }
         ?>
     </section>

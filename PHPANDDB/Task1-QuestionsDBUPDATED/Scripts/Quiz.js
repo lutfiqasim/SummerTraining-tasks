@@ -4,9 +4,7 @@ $(document).ready(function () {
 
         // Select all direct children divs of the body
         const questionDivs = $("section > div");
-        // console.log(questionDivs.get(0));
-        // console.log("__________________________");
-        // console.log($(questionDivs.get(1)).children());
+        const quizId = $("#quizId").attr("value");
         answer = [];
         questionDivs.each(function (index, div) {
             isSelected = false;
@@ -30,17 +28,18 @@ $(document).ready(function () {
         if (answer.length == questionDivs.length) {//All questions have been answered
             console.log("BEFORE");
             console.log(answer);
-            checkAnswer(answer);
+            checkAnswer(quizId,answer);
         }
 
     });
 
-    function checkAnswer(questionAnswers) {
+    function checkAnswer(quizId,questionAnswers) {
         $.ajax({
             url: "..\\DataAccess\\checkAnsweredQuestions.php",
             method: "POST",
             data: {
                 action: "check",
+                id: quizId,
                 data: questionAnswers
             },
             success: function (response) {

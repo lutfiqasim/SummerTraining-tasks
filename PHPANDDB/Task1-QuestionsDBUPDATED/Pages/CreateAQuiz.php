@@ -24,6 +24,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="..\CSS\startQuiz.css">
     <link rel="stylesheet" href="..\CSS\indexPage.css">
+    <!-- SELECT 2 jquery for search -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!--  -->
     <?php
     if ($_SESSION['role'] == "Teacher") {
         echo "<script src='..\Scripts\AttemptQuiz.js'></script>";

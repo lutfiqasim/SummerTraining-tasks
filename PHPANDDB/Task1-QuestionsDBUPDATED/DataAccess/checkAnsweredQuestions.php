@@ -4,61 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Quiz Results</title>
-    <!-- Add your CSS and other header content here -->
 </head>
 
 <body>
-    
+
     <?php
     include_once("Database.php");
     include_once("..\phpActions\GetQuestions.php");
+    include_once("..\phpActions\SaveAttempts.php");
+    include_once("..\Pages\displayQuizResultFormat.php");
+    include_once('..\phpActions\GetQuiz.php');
+    session_start();
 
     if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
         if (isset($_POST['action']) && $_POST['action'] == "check") {
             if (isset($_POST['data'])) {
-                $questionData = $_POST['data'];
-                $idvalues = [];
-                $answers = [];
-                foreach ($questionData as $key => $value) {
-                    $idvalues[] = $value['key'];
-                }
-                $getAnswer = new GetQuestions();
-                $correctAnswers = ($getAnswer->getCorrectAnswers($idvalues));
-                $score = checkScore($questionData, $correctAnswers);
-                echo "<div id='score-div'><p>Your score is: $score out of " . (count($questionData) * 10) . "</p></div>";
-
-                // Display question-answer cards
-                foreach ($questionData as $value) {
-                    $questionId = $value['key'];
-                    $userAnswer = $value['value'];
-
-                    foreach ($correctAnswers as $correctAnswer) {
-                        if ($correctAnswer['questionId'] == $questionId) {
-                            //Wrong answer
-                            if ($userAnswer !== $correctAnswer['answerSyntax']) {
-                                echo "<div class='card wrongAnswer'>
-                            <p>Question: {$correctAnswer['question-Syntax']}</p>
-                            <p>Your Answer: $userAnswer</p>
-                            <p>Correct Answer: {$correctAnswer['answerSyntax']}</p>
-                          </div>";
-                            } else {
-                                echo "<div class='card correctAnswer'>
-                            <p>Question: {$correctAnswer['question-Syntax']}</p>
-                            <p>Your Answer: $userAnswer</p>
-                            <p>Correct Answer: {$correctAnswer['answerSyntax']}</p>
-                          </div>";
-                            }
-
-                        }
+                try {
+                    $questionData = $_POST['data'];
+                    $idvalues = [];
+                    foreach ($questionData as $key => $value) {
+                        $idvalues[] = $value['key'];
                     }
+                    $getAnswer = new GetQuestions();
+                    $correctAnswers = ($getAnswer->getCorrectAnswers($idvalues));
+                    $getQuestions = new GetQuiz();
+                    $quizTitle = $getQuestions->getQuizData($_POST['id']);
+                    $score = checkScore($questionData, $correctAnswers);
+                    displayResultFormat($score, $questionData, $correctAnswers,$quizTitle);
+                    $result = SavebestAttemptAndLastAttemp($score);
+                    // print_r($result);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
                 }
-
-                echo "<a href='index.php'>Go back to the main Page</a></div>";
             }
         }
     }
-
     function checkScore($data, $correctAnswer)
     {
         $score = 0;
@@ -75,9 +56,27 @@
         }
         return $score;
     }
-    ?>
 
-    <!-- Add your CSS link for styling the cards -->
+    function SavebestAttemptAndLastAttemp($currentScore)
+    {
+        try {
+            $quizId = $_POST['id'];
+            $usreId = $_SESSION['user_id'];
+            //json encode format:answer:
+            //key:questionId value: user answer
+            // [{"key":"7","value":"1000"},{"key":"30","value":"True"},{"key":"31","value":"Spinach "},{"key":"93","value":"Choice1 updated"},{"key":"117","value":"CorrectAnswer"}
+            $userAnswers = json_encode($_POST['data']);
+
+            $saveAttempts = new SaveAttempts($usreId, $quizId);
+            return $saveAttempts->saveAttemptData($quizId, $usreId, $currentScore, $userAnswers);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage(), 1);
+
+        }
+
+    }
+
+    ?>
 
 </body>
 

@@ -32,6 +32,10 @@ $(document).ready(function () {
             const option = $("<option>").val(question.id).text(question['question-Syntax']);
             $('#question-list').append(option);
         });
+
+        //After populating select change it to select 2 format
+
+        $("#question-list").select2();
     }
     // End of populating options with questions
 
@@ -55,6 +59,7 @@ $(document).ready(function () {
 
         if (!questionExists) {
             // Add the question to the array and display it
+            $($selectedOption).attr('disabled','disabled');
             questionsToAdd.push({ key: $selectedOption.val(), value: $selectedOption.text() });
             const question = $("<div class='questionToBeAdded'>").val($selectedOption.val()).text($selectedOption.text());
             const delteBtn = $("<span class='deleteChoice' style='float:right;' >×</span><br/><hr/>");
@@ -73,6 +78,9 @@ $(document).ready(function () {
             const questionKey = $(this).parent().val();
             //Filter: returns a new array that includes all elements from the original array except the ones that match the condition
             questionsToAdd = questionsToAdd.filter(q => q.key !== questionKey);
+
+            //Enable the choice again
+            $("#question-list").find(`option[value="${questionKey}"]`).prop("disabled", false);
         }
     });
 
