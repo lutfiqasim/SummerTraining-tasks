@@ -1,0 +1,49 @@
+/* Reset default margin and padding for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Apply basic styling to the body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Style the score-div */
+#score-div {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Style the quiz result cards */
+.card {
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+.correctAnswer {
+    border-color: #4caf50; /* Green border for correct answers */
+}
+.wrongAnswer{
+    border-color: red;
+}
+
+/* Style the link to go back to the main page */
+a {
+    display: block;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -20,8 +20,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="..\CSS\DeleteQuestions.css" />
-    <link type="text/css" rel="stylesheet" href="..\CSS\QuizResult.css" />
+    <link type="text/css" rel="stylesheet" href="..\CSS\previousAttempt.css" />
     <title>Previous Attempts</title>
 </head>
 
@@ -36,36 +35,43 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
             if ($bestscore === "Attempt quiz to get score") {
                 echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='index.php'>Go back to the main Page</a></div>";
             } else {
-                displayAttemptData($bestscore, $quizId, $userid);
+                $best_attempt_question_answer = json_decode(($getAttempts->getBestAttemptData($quizId, $userid))[0]['best_Attempt_Answers']);
+                displayAttemptData($bestscore, $quizId, $userid, $best_attempt_question_answer);
             }
         } elseif ($_GET['requested'] == "last") {
             $lastScore = $getAttempts->getLastAttemptScore($quizId, $userid);
             if ($lastScore === "Attempt quiz to get score") {
                 echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='index.php'>Go back to the main Page</a></div>";
             } else {
-                displayAttemptData($lastScore, $quizId, $userid);
+                $last_attempt_question_answer = json_decode(($getAttempts->getLastAttemptData($quizId, $userid))[0]['Last_Attempt_Answers']);
+                displayAttemptData($lastScore, $quizId, $userid, $last_attempt_question_answer);
             }
         }
 
     } else {
         header("Location:index.php?message=Access Denied");
     }
-    function displayAttemptData($score, $quizId, $userid)
+    /**
+     * 
+     * 
+     * 
+     * 
+     */
+    //Looping through decoded json array (attempt data)
+    // foreach ($best_attempt_question_answer as $item) {
+    //     $key = $item->key;
+    //     $value = $item->value;
+    
+    //     // Now you can use $key and $value as needed
+    //     echo "Question ID: $key, User Answer: $value<br>";
+    // }
+    function displayAttemptData($score, $quizId, $userid, $best_attempt_question_answer)
     {
-        $getAttempts = new SaveAttempts($userid, $quizId);
         $getQuestions = new GetQuiz();
         $quizTitle = $getQuestions->getQuizData($quizId);
         //Holds key:question id AND value:user previous answer
-        $best_attempt_question_answer = json_decode(($getAttempts->getBestAttemptData($quizId, $userid))[0]['best_Attempt_Answers']);
         $correctAns = getCorrectAnswers($best_attempt_question_answer);
         displayPreviousAttempt($score, $best_attempt_question_answer, $correctAns, $quizTitle);
-        // foreach ($best_attempt_question_answer as $item) {
-        //     $key = $item->key;
-        //     $value = $item->value;
-    
-        //     // Now you can use $key and $value as needed
-        //     echo "Question ID: $key, User Answer: $value<br>";
-        // }
     }
     function getCorrectAnswers($data)
     {
