@@ -27,44 +27,37 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
 <body>
     <?php
     if ($_SERVER['REQUEST_METHOD'] == "GET" && isset($_GET['quiz']) && isset($_GET['requested'])) {
-        $quizId = $_GET['quiz'];
-        $userid = $_SESSION['user_id'];
-        $getAttempts = new SaveAttempts($userid, $quizId);
-        if ($_GET['requested'] == "best") {
-            $bestscore = $getAttempts->getBestAttemptScore($quizId, $userid);
-            if ($bestscore === "Attempt quiz to get score") {
-                echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='index.php'>Go back to the main Page</a></div>";
-            } else {
-                $best_attempt_question_answer = json_decode(($getAttempts->getBestAttemptData($quizId, $userid))[0]['best_Attempt_Answers']);
-                displayAttemptData($bestscore, $quizId, $userid, $best_attempt_question_answer);
+        try {
+            $quizId = $_GET['quiz'];
+            $userid = $_SESSION['user_id'];
+            $getAttempts = new SaveAttempts($userid, $quizId);
+            if ($_GET['requested'] == "best") {
+                $bestscore = $getAttempts->getBestAttemptScore($quizId, $userid);
+                if ($bestscore === "Attempt quiz to get score") {
+                    echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='AttemptQuiz2.php'>Go back</a></div>";
+                } else {
+                    // $best_attempt_question_answer = json_decode(($getAttempts->getBestAttemptData($quizId, $userid))[0]['best_Attempt_Answers']);
+                    $best_attempt_question_answer = $getAttempts->getBestAttemptData($quizId, $userid);
+                    displayAttemptData($bestscore, $quizId, $userid, $best_attempt_question_answer);
+                    // print_r($best_attempt_question_answer);
+                }
+            } elseif ($_GET['requested'] == "last") {
+                $lastScore = $getAttempts->getLastAttemptScore($quizId, $userid);
+                if ($lastScore === "Attempt quiz to get score") {
+                    echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='AttemptQuiz2.php'>Go back</a></div>";
+                } else {
+                    $allPreviousAttempts = $getAttempts->getLastAttemptsData($quizId, $userid);
+                    generateAttemptsTable($quizId,$allPreviousAttempts);
+                }
             }
-        } elseif ($_GET['requested'] == "last") {
-            $lastScore = $getAttempts->getLastAttemptScore($quizId, $userid);
-            if ($lastScore === "Attempt quiz to get score") {
-                echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='index.php'>Go back to the main Page</a></div>";
-            } else {
-                $last_attempt_question_answer = json_decode(($getAttempts->getLastAttemptData($quizId, $userid))[0]['Last_Attempt_Answers']);
-                displayAttemptData($lastScore, $quizId, $userid, $last_attempt_question_answer);
-            }
-        }
+        } catch (Exception $e) {
+            echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/>We are encountring some errors,Try again later</div>";
+            echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='AttemptQuiz2.php'>Go back</a></div>";
 
+        }
     } else {
         header("Location:index.php?message=Access Denied");
     }
-    /**
-     * 
-     * 
-     * 
-     * 
-     */
-    //Looping through decoded json array (attempt data)
-    // foreach ($best_attempt_question_answer as $item) {
-    //     $key = $item->key;
-    //     $value = $item->value;
-    
-    //     // Now you can use $key and $value as needed
-    //     echo "Question ID: $key, User Answer: $value<br>";
-    // }
     function displayAttemptData($score, $quizId, $userid, $best_attempt_question_answer)
     {
         $getQuestions = new GetQuiz();
@@ -77,11 +70,46 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     {
         $idvalues = [];
         foreach ($data as $item) {
-            $idvalues[] = $item->key;
+            $idvalues[] = $item['questionId'];
         }
         $getAnswer = new GetQuestions();
         return ($getAnswer->getCorrectAnswers($idvalues));
     }
+
+    function generateAttemptsTable($quizId,$attemptsData)
+    {
+        echo "<div style=' margin:10px;font-size:18px;text-align: center;'>Quiz 1 </div>";
+        echo '<table class="attempts-table">';
+        echo '<tr>
+                <th>Attempt#</th>
+                
+                <th>Score</th>
+                <th>Time Taken</th>
+                <th></th>
+              </tr>';
+        //   <th>Quiz</th>
+    
+        foreach ($attemptsData as $index => $attempt) {
+            $attemptNumber = $index + 1;
+            // $quizName = "Attempt " . $attempt['id'];
+            $score = $attempt['score'];
+            $timeTaken = $attempt['ti'];
+
+            echo '<tr>
+            <form action="attempts_details_page.php" method="post">
+                <input style="display:none;" name="quizId" value ='.$quizId.'></input>
+                <input style="display:none;" name="score" value ='.$score.'></input>
+                <td>' . $attemptNumber . '</td>
+                <td>' . $score . '</td>
+                <td>' . $timeTaken . '</td>
+                <td><button name="details" value="' . $attempt['id'] . '">View Details</button></td>
+            </form>
+          </tr>';
+            // echo '<a href="index.php">Go back </a>'
+        }
+        echo '</table>';
+    }
+
     ?>
 </body>
 

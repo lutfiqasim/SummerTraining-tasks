@@ -23,6 +23,13 @@ class Database
         }
     }
 
+    public function close()
+    {
+        if ($this->conn) {
+            $this->conn->close();
+            $this->conn = null;
+        }
+    }
     /**
      * Summary of read
      * @param mixed $query

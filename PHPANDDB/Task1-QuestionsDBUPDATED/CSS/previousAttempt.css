@@ -47,3 +47,28 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+/* This css for brevious attempts that are displayed as table  */
+    .attempts-table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    .attempts-table th, .attempts-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+    }
+    
+    .attempts-table th {
+        background-color: #f2f2f2;
+    }
+    
+    .attempts-table button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+

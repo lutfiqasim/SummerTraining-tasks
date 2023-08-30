@@ -37,11 +37,11 @@ function displayAttemptQuiz()
     <main>
         <?php
         formatSideBar($_SESSION['role']);
-        if ($_SESSION['role'] == "Teacher") {
-            header("Location:CreateAQuiz.php");
-        } else {
-            echo displayAttemptQuiz();
-        }
+        // if ($_SESSION['role'] == "Teacher") {
+        //     header("Location:CreateAQuiz.php");
+        // } else {
+        echo displayAttemptQuiz();
+        // }
         ?>
 
     </main>

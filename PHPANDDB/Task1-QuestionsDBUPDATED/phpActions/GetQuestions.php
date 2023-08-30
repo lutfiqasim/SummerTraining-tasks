@@ -139,5 +139,22 @@ class GetQuestions
             return "Error accord while getting data:\n" . $e->getMessage();
         }
     }
+
+    //Note: This is only implmeemnted until i update SaveAttempts get Attempt data
+
+    public function getAnswerSyntax($answerId)
+    {
+        try{
+            $query = "SELECT answerSyntax as syntax FROM answers WHERE id = ?";
+            $conn = new Database();
+            $result = $conn ->read($query,[$answerId]);
+            return $result[0]['syntax'];
+        }catch(Exception $e)
+        {
+            throw new Exception("Error Getting answer syntax: ".$e->getMessage(), 1);
+            
+        }
+    }
+
 }
 ?>

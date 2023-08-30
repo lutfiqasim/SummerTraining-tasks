@@ -15,30 +15,35 @@
     include_once("..\Pages\displayQuizResultFormat.php");
     include_once('..\phpActions\GetQuiz.php');
     session_start();
+    if (isset($_SESSION['user_id'])) {
 
-    if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-        if (isset($_POST['action']) && $_POST['action'] == "check") {
-            if (isset($_POST['data'])) {
-                try {
-                    $questionData = $_POST['data'];
-                    $idvalues = [];
-                    foreach ($questionData as $key => $value) {
-                        $idvalues[] = $value['key'];
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+            if (isset($_POST['action']) && $_POST['action'] == "check") {
+                if (isset($_POST['data'])) {
+                    try {
+                        $questionData = $_POST['data'];
+                        $idvalues = [];
+                        foreach ($questionData as $key => $value) {
+                            $idvalues[] = $value['key'];
+                        }
+                        $getAnswer = new GetQuestions();
+                        $correctAnswers = ($getAnswer->getCorrectAnswers($idvalues));
+                        $getQuestions = new GetQuiz();
+                        $quizTitle = $getQuestions->getQuizData($_POST['id']);
+                        $score = checkScore($questionData, $correctAnswers);
+                        displayResultFormat($score, $questionData, $correctAnswers, $quizTitle);
+                        $result = SavebestAttemptAndLastAttemp($score);
+                        print_r($result);
+                    } catch (Exception $e) {
+                        echo $e->getMessage();
                     }
-                    $getAnswer = new GetQuestions();
-                    $correctAnswers = ($getAnswer->getCorrectAnswers($idvalues));
-                    $getQuestions = new GetQuiz();
-                    $quizTitle = $getQuestions->getQuizData($_POST['id']);
-                    $score = checkScore($questionData, $correctAnswers);
-                    displayResultFormat($score, $questionData, $correctAnswers,$quizTitle);
-                    $result = SavebestAttemptAndLastAttemp($score);
-                    // print_r($result);
-                } catch (Exception $e) {
-                    echo $e->getMessage();
                 }
             }
         }
+    } else {
+        header("Location:..\Pages\index.php");
     }
     function checkScore($data, $correctAnswer)
     {
@@ -65,10 +70,10 @@
             //json encode format:answer:
             //key:questionId value: user answer
             // [{"key":"7","value":"1000"},{"key":"30","value":"True"},{"key":"31","value":"Spinach "},{"key":"93","value":"Choice1 updated"},{"key":"117","value":"CorrectAnswer"}
-            $userAnswers = json_encode($_POST['data']);
-
+            // $userAnswers = json_encode($_POST['data']);
+            // print_r($_POST['data']);
             $saveAttempts = new SaveAttempts($usreId, $quizId);
-            return $saveAttempts->saveAttemptData($quizId, $usreId, $currentScore, $userAnswers);
+            return $saveAttempts->saveAttemptData($quizId, $usreId, $_POST['data'],$currentScore);
         } catch (Exception $e) {
             throw new Exception($e->getMessage(), 1);
 

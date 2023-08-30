@@ -6,6 +6,7 @@ function formatSideBar($userType)
         $sidebar = "<div id='sidebar'>
         <a href='CreateAQuiz.php?'>Create An exam</a>
         <a href='ShowUserExams.php?'>Show my exams</a>
+        <a href='AttemptQuiz2.php'>Try an exam</a>
         <a href='SeeAllQuestions.php'>View All users questions</a>
         <a href='addQuestion.php'>Add new Question</a>
         </div>";
