@@ -83,7 +83,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
         include_once("Header-SideBar.php");
         global $userData;
         formatInnerPagesHeader($userData);
-        echo "<div style=' margin:10px;font-size:18px;text-align: center;'>Quiz 1 </div>";
+        echo "<div style='margin:10px;margin-top:25px;font-size:18px;text-align: center;'>Quiz 1 </div>";
         echo '<table class="attempts-table">';
         echo '<tr>
                 <th>Attempt#</th>

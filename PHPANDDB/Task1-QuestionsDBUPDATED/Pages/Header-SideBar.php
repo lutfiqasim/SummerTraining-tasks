@@ -33,10 +33,13 @@ function formatHeader($data)
 }
 function formatInnerPagesHeader($data)
 {
-    echo "<div style='background-color:#ff6666;padding:20px' class='user-info'>";
+    echo "<div style='background-color:#ff6666;padding:20px;margin:-20px -20px;' class='user-info'>";
     echo "<img src='..\..\..\..\..\Social Website\images\user_male.jpg' width='20px'/>";
     echo "<a style='color:white;text-decoration:none;float:right;margin-bottom:20px;' href='logout.php' class='logout-button'>Log-out</a>";
     echo "<h3 class='user-name'>" . $data['username'] . "</h3>";
+    echo "<div class='welcome-message'>";
+    echo "<a style='text-decoration:none;color:white;margin-top:-35px;' href='#'><h2>See your Attempts</h2></a>";
+    echo "</div>";
     echo "</div>";
 }
 ?>
