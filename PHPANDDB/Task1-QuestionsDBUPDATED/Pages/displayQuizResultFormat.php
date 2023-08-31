@@ -10,7 +10,7 @@ function displayResultFormat($score, $questionData, $correctAnswers, $quizTitle)
         checkAnswer($correctAnswers, $questionId, $userAnswer);
     }
     echo "<br>";
-    echo "<a href='index.php'>Go back to the main Page</a></div>";
+    echo "<a href='index.php'>Go back to the main Pages</a></div>";
 }
 function displayPreviousAttempt($score, $questionData, $correctAnswers, $quizTitle)
 {
@@ -23,8 +23,14 @@ function displayPreviousAttempt($score, $questionData, $correctAnswers, $quizTit
         checkAnswer($correctAnswers, $questionId, $userAnswer);
     }
     echo "<br>";
-    echo "<a href='AttemptQuiz2.php'>Go back</a></div>";
+
 }
+/*TODO:
+ * Add a Attempt quiz again button inside the 
+ * see previous attempts
+ * in addition to inside the no attempts found
+ * and as a new column inside the table 
+ */
 function checkAnswer($correctAnswers, $questionId, $userAnswer)
 {
 
@@ -55,15 +61,27 @@ function checkAnswer($correctAnswers, $questionId, $userAnswer)
  * gets answer syntax from answer id and then send data to be displayed
  * 
  */
-function dsiplayPreviousHelper($score, $questionData, $correctAnswers, $quizTitle)
+function dsiplayPreviousHelper($score, $questionData, $correctAnswers, $quizTitle, $quizId)
 {
     $getQuestions = new GetQuestions();
-        //Getting users' answer syntax
-       for($i =0; $i<count($questionData);$i++)
-       {
-            $questionData[$i]['userAnswer'] = ($getQuestions->getAnswerSyntax($questionData[$i]['userAnswer']))[0]['syntax'];;
-       }
-        displayPreviousAttempt($score,$questionData,$correctAnswers,$quizTitle);        
+    //Getting users' answer syntax
+    for ($i = 0; $i < count($questionData); $i++) {
+        $questionData[$i]['userAnswer'] = ($getQuestions->getAnswerSyntax($questionData[$i]['userAnswer']))[0]['syntax'];
+    }
+    displayPreviousAttempt($score, $questionData, $correctAnswers, $quizTitle);
+    //Button to attempt quiz again
+    echo "<div class='gobackDivs' style='float:right;'>";
+    // echo "<a href='index.php'>Go back Main Page</a></div>";
+    echo "<form method='post' action='QuizPage.php'>";
+    echo '<input type="hidden" name="quiz_id" value="' . $quizId . '">';
+    echo '<button type="submit" name="start" value="ReTake">Re-take Exam</button>';
+    echo "</form>";
+    echo "<a class='goBackToPreviousAttempts' href='PreviousAttempts.php?quiz=" . $quizId .
+        "&requested=last'" . "</a>Go back</div>";
+    echo "</div>";
+
+
+
 }
 
 ?>

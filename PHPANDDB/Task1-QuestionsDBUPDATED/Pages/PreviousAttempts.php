@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
 } else {
-    header("Location:SignIn.php?message=AccessNotAllowed");
+    header("Location:index.php?message=AccessNotAllowed");
 }
 ?>
 <!DOCTYPE html>
@@ -66,7 +66,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
         $quizTitle = $getQuiz->getQuizData($quizId);
         //Holds key:question id AND value:user previous answer
         $correctAns = getCorrectAnswers($best_attempt_question_answer);
-        dsiplayPreviousHelper($score, $best_attempt_question_answer, $correctAns, $quizTitle);
+        dsiplayPreviousHelper($score, $best_attempt_question_answer, $correctAns, $quizTitle,$quizId);
     }
     function getCorrectAnswers($data)
     {
@@ -109,10 +109,10 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
                 <td><button name="details" value="' . $attempt['id'] . '">View Details</button></td>
             </form>
           </tr>';
-            // echo '<a href="index.php">Go back </a>'
+            
         }
         echo '</table>';
-        echo "<a href='AttemptQuiz2.php'>Go back</a></div>";
+        echo '<a  href="AttemptQuiz2.php">Go back </a>';
     }
 
     ?>
