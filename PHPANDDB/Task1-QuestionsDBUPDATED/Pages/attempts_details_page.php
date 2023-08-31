@@ -26,7 +26,7 @@ function displayAttemptData($score, $quizId, $userid, $attempt_question_answer)
     $quizTitle = $getQuestions->getQuizData($quizId);
     //Holds key:question id AND value:user previous answer
     $correctAns = getCorrectAnswers($attempt_question_answer);
-    displayPreviousAttempt($score, $attempt_question_answer, $correctAns, $quizTitle);
+    dsiplayPreviousHelper($score, $attempt_question_answer, $correctAns, $quizTitle);
 }
 function getCorrectAnswers($data)
 {

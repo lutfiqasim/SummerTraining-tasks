@@ -31,7 +31,14 @@ function formatHeader($data)
     echo "<h2><a href='logout.php' class='logout-button'>Log-out</a></h2>";
     echo "</div>";
 }
-
+function formatInnerPagesHeader($data)
+{
+    echo "<div style='background-color:#ff6666;padding:20px' class='user-info'>";
+    echo "<img src='..\..\..\..\..\Social Website\images\user_male.jpg' width='20px'/>";
+    echo "<a style='color:white;text-decoration:none;float:right;margin-bottom:20px;' href='logout.php' class='logout-button'>Log-out</a>";
+    echo "<h3 class='user-name'>" . $data['username'] . "</h3>";
+    echo "</div>";
+}
 ?>
 <!-- Implements jquery dependencies -->
 <!DOCTYPE html>

@@ -6,10 +6,12 @@ include_once("..\phpActions\SaveAttempts.php");
 include_once("..\phpActions\GetQuestions.php");
 include_once("displayQuizResultFormat.php");
 include_once('..\phpActions\GetQuiz.php');
+include_once('..\phpActions\GetQuestions.php');
 // include_once("..\DataAccess\StartQuizDA.php"); 
+$userData ="";
 if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     $signin = new SignIn();
-    $signin->check_login($_SESSION['user_id']);
+    $userData = $signin->check_login($_SESSION['user_id']);
 } else {
     header("Location:SignIn.php?message=AccessNotAllowed");
 }
@@ -47,7 +49,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
                     echo "<div style='margin:80px 0;font-size:28px;text-align: center; color: red;'>Attempt quiz first to get a result<br/><a href='AttemptQuiz2.php'>Go back</a></div>";
                 } else {
                     $allPreviousAttempts = $getAttempts->getLastAttemptsData($quizId, $userid);
-                    generateAttemptsTable($quizId,$allPreviousAttempts);
+                    generateAttemptsTable($quizId, $allPreviousAttempts);
                 }
             }
         } catch (Exception $e) {
@@ -60,11 +62,11 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     }
     function displayAttemptData($score, $quizId, $userid, $best_attempt_question_answer)
     {
-        $getQuestions = new GetQuiz();
-        $quizTitle = $getQuestions->getQuizData($quizId);
+        $getQuiz = new GetQuiz();
+        $quizTitle = $getQuiz->getQuizData($quizId);
         //Holds key:question id AND value:user previous answer
         $correctAns = getCorrectAnswers($best_attempt_question_answer);
-        displayPreviousAttempt($score, $best_attempt_question_answer, $correctAns, $quizTitle);
+        dsiplayPreviousHelper($score, $best_attempt_question_answer, $correctAns, $quizTitle);
     }
     function getCorrectAnswers($data)
     {
@@ -76,13 +78,15 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
         return ($getAnswer->getCorrectAnswers($idvalues));
     }
 
-    function generateAttemptsTable($quizId,$attemptsData)
+    function generateAttemptsTable($quizId, $attemptsData)
     {
+        include_once("Header-SideBar.php");
+        global $userData;
+        formatInnerPagesHeader($userData);
         echo "<div style=' margin:10px;font-size:18px;text-align: center;'>Quiz 1 </div>";
         echo '<table class="attempts-table">';
         echo '<tr>
                 <th>Attempt#</th>
-                
                 <th>Score</th>
                 <th>Time Taken</th>
                 <th></th>
@@ -97,8 +101,8 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
 
             echo '<tr>
             <form action="attempts_details_page.php" method="post">
-                <input style="display:none;" name="quizId" value ='.$quizId.'></input>
-                <input style="display:none;" name="score" value ='.$score.'></input>
+                <input style="display:none;" name="quizId" value =' . $quizId . '></input>
+                <input style="display:none;" name="score" value =' . $score . '></input>
                 <td>' . $attemptNumber . '</td>
                 <td>' . $score . '</td>
                 <td>' . $timeTaken . '</td>
@@ -108,6 +112,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
             // echo '<a href="index.php">Go back </a>'
         }
         echo '</table>';
+        echo "<a href='AttemptQuiz2.php'>Go back</a></div>";
     }
 
     ?>

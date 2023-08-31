@@ -148,7 +148,7 @@ class GetQuestions
             $query = "SELECT answerSyntax as syntax FROM answers WHERE id = ?";
             $conn = new Database();
             $result = $conn ->read($query,[$answerId]);
-            return $result[0]['syntax'];
+            return $result;
         }catch(Exception $e)
         {
             throw new Exception("Error Getting answer syntax: ".$e->getMessage(), 1);

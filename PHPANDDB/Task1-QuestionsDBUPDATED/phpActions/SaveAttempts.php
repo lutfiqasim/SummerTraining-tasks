@@ -154,7 +154,7 @@ class SaveAttempts
 
         }
     }
-    
+
     public function numberOfparticipantsOfQuiz($quiz_id)
     {
         try {
@@ -170,20 +170,20 @@ class SaveAttempts
     public function getScoresStats($quiz_id)
     {
         try {
-            $query = "SELECT AVG(last_Attempt_Score) as avgLastScore, MAX(best_Attempt_Score) as maxBestScore FROM user_quizes_log WHERE quizId = ?";
+            $query = "SELECT AVG(score) as avgScore, MAX(score) as maxScore FROM user_quizes_log WHERE quizId = ?";
             $numberOfQuestionsQuery = "SELECT COUNT(*) as numberOfquestions FROM quizes_questions WHERE quizId = ? ";
             // $conn = new Database();
             $avgScore_MAxScore = $this->conn->read($query, [$quiz_id]);
             $totalQuestions = $this->conn->read($numberOfQuestionsQuery, [$quiz_id]);
             $stats = array(
-                'averageLastScore' => $avgScore_MAxScore[0]['avgLastScore'],
-                'maxBestScore' => $avgScore_MAxScore[0]['maxBestScore'],
+                'averageLastScore' => $avgScore_MAxScore[0]['avgScore'],
+                'maxBestScore' => $avgScore_MAxScore[0]['maxScore'],
                 'totalQuestions' => $totalQuestions[0]['numberOfquestions']
             );
 
             return $stats;
         } catch (Exception $e) {
-            throw new Exception("Error getting scores stats", 1);
+            throw new Exception("Error getting scores stats:" . $e->getMessage(), 1);
         }
     }
 
