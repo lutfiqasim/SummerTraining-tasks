@@ -26,13 +26,13 @@ function displaySorted($action)
 function displayFormat($questions)
 {
     echo "<table style='width:100%'>";
-    // echo "<tr>";
+    echo "<tr>";
     echo "<div id ='sort'>";
     echo "<div id='descending' class='sortingBtn'>" . "Sort Descending Order" . "</div>";
     echo "<div class='flex-spacer'></div>";
     echo "<div id='ascending' class='sortingBtn'>" . "Sort Ascending Order" . "</div>";
     echo "</div>";
-    // echo "</tr>";
+    echo "</tr>";
     echo "<tr><th>ID</th><th>Question</th></tr>";
 
     foreach ($questions as $question) {

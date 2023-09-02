@@ -47,15 +47,15 @@ function displayFormat($questions)
 {
     echo "<table style='width:100%;min-width:800px'>";
     // echo "<tr>";
-    echo "<div id ='sort'>";
-    echo "<div id='descending' class='sortingBtn'>" . "Sort Descending Order" . "</div>";
+    // echo "<div id ='sort'>";
+    // echo "<div id='descending' class='sortingBtn'>" . "Sort Descending Order" . "</div>";
 
-    echo "<div class='flex-spacer'></div>";
-    echo "<div id='ascending' class='sortingBtn'>" . "Sort Ascending Order" . "</div>";
-    echo "<noscript>";
-    echo "<div class='sortingBtn'>" . "<a href='AddQuestion.php'>Add Question</a>" . "</div>";
-    echo "</noscript>";
-    echo "</div>";
+    // echo "<div class='flex-spacer'></div>";
+    // echo "<div id='ascending' class='sortingBtn'>" . "Sort Ascending Order" . "</div>";
+    // echo "<noscript>";
+    // echo "<div class='sortingBtn'>" . "<a href='AddQuestion.php'>Add Question</a>" . "</div>";
+    // echo "</noscript>";
+    // echo "</div>";
     // echo "</tr>";
     echo "<tr><th>ID</th><th>Question</th></tr>";
 

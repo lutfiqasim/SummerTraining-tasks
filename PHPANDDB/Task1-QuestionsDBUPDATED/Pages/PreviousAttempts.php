@@ -8,7 +8,7 @@ include_once("displayQuizResultFormat.php");
 include_once('..\phpActions\GetQuiz.php');
 include_once('..\phpActions\GetQuestions.php');
 // include_once("..\DataAccess\StartQuizDA.php"); 
-$userData ="";
+$userData = "";
 if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
     $signin = new SignIn();
     $userData = $signin->check_login($_SESSION['user_id']);
@@ -66,7 +66,7 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
         $quizTitle = $getQuiz->getQuizData($quizId);
         //Holds key:question id AND value:user previous answer
         $correctAns = getCorrectAnswers($best_attempt_question_answer);
-        dsiplayPreviousHelper($score, $best_attempt_question_answer, $correctAns, $quizTitle,$quizId);
+        dsiplayPreviousHelper($score, $best_attempt_question_answer, $correctAns, $quizTitle, $quizId);
     }
     function getCorrectAnswers($data)
     {
@@ -107,9 +107,12 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
                 <td>' . $score . '</td>
                 <td>' . $timeTaken . '</td>
                 <td><button name="details" value="' . $attempt['id'] . '">View Details</button></td>
-            </form>
-          </tr>';
-            
+            </form>' .
+                "<td><form method='post' action='QuizPage.php'>".
+            '<input type="hidden" name="quiz_id" value="' . $quizId . '">'.
+            '<button type="submit" name="start" value="ReTake">Re-take Exam</button>
+            </form></td>' . '</tr>';
+
         }
         echo '</table>';
         echo '<a  href="AttemptQuiz2.php">Go back </a>';
